@@ -2,6 +2,12 @@ import pygame
 import time
 import sys
 import threading
+import RPi.GPIO as GPIO
+
+# ================= LED =================
+LED_PIN = 17 # GPIO017
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED_PIN, GPIO.OUT)
 
 # ================= THREAD CONTROL =================
 stop_event = threading.Event()
@@ -14,7 +20,7 @@ def loop_print(text):
     print(f"{text} started")
     while not stop_event.is_set():
         print(text)
-        time.sleep(1)
+        time.sleep(0.25)
     print(f"{text} stopped")
 
 
@@ -23,7 +29,7 @@ def mundur(): loop_print("mundur")
 def jalan_kiri_miring(): loop_print("miring kiri")
 def jalan_kanan_miring(): loop_print("miring kanan")
 def berdiri(): loop_print("berdiri")
-def stop(): loop_print("stop")
+def stop(): print("stop")
 def tambah_speed(): loop_print("tambah speed")
 def kurang_speed(): loop_print("kurang speed")
 def muter_kiri(): loop_print("muter kiri")
@@ -86,16 +92,15 @@ try:
             f"Buttons: {buttons} | "
             f"D-pad: {hats}"
         )
-        sys.stdout.write("\r" + output)
-        sys.stdout.flush()
-
+        #sys.stdout.write("\r" + output)
+        #sys.std
         # ================= CONTROL LOGIC =================
 
         # ---- PRIORITY OVERRIDE ----
-        if len(buttons) > 0 and buttons[0] == 1:
+        if len(buttons) > 0 and buttons[1] == 1:
             start_action(berdiri, "berdiri")
 
-        elif len(buttons) > 1 and buttons[1] == 1:
+        elif len(buttons) > 1 and buttons[2] == 1:
             start_action(stop, "stop")
 
         # ---- D-PAD ----
@@ -112,7 +117,7 @@ try:
             start_action(jalan_kanan_miring, "kanan")
 
         # ---- BUTTON ACTIONS ----
-        elif len(buttons) > 2 and buttons[2] == 1:
+        elif len(buttons) > 2 and buttons[0] == 1:
             start_action(tambah_speed, "tambah")
 
         elif len(buttons) > 3 and buttons[3] == 1:
@@ -123,8 +128,15 @@ try:
 
         elif len(buttons) > 5 and buttons[5] == 1:
             start_action(muter_kanan, "muter_kanan")
+        
+        elif buttons[8] == 1:
+            GPIO.output(LED_PIN, GPIO.HIGH)
+        
+        elif buttons[9] == 1:
+            GPIO.output(LED_PIN, GPIO.LOW)
 
         time.sleep(0.05)
+        GPIO.cleanup()
 
 except KeyboardInterrupt:
     stop_event.set()
