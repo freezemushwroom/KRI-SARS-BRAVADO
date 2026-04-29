@@ -7,7 +7,8 @@ import RPi.GPIO as GPIO
 # ================= LED =================
 LED_PIN = 17 # GPIO017
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(LED_PIN, GPIO.OUT)
+GPIO.setwarnings(False)
+GPIO.setup(17, GPIO.OUT)
 
 # ================= THREAD CONTROL =================
 stop_event = threading.Event()
@@ -130,13 +131,19 @@ try:
             start_action(muter_kanan, "muter_kanan")
         
         elif buttons[8] == 1:
-            GPIO.output(LED_PIN, GPIO.HIGH)
+            GPIO.output(17, GPIO.HIGH)
         
         elif buttons[9] == 1:
-            GPIO.output(LED_PIN, GPIO.LOW)
+            GPIO.output(17, GPIO.LOW)
+        
+        elif buttons[10] == 1:
+            break
+
+        elif buttons[11] == 1:
+            break
 
         time.sleep(0.05)
-        GPIO.cleanup()
+        #GPIO.cleanup()
 
 except KeyboardInterrupt:
     stop_event.set()
