@@ -885,10 +885,22 @@ def start_action(func, name):
 pygame.init()
 pygame.joystick.init()
 
-if pygame.joystick.get_count() == 0:
-    print("No joystick detected!")
-    exit()
+timeout = 60
+start_time = time.time()
 
+while pygame.joystick.get_count() == 0:
+
+    pygame.event.pump()
+
+    if time.time() - start_time >= timeout:
+        print("Joystick timeout")
+        berdiri()
+        GPIO.output(LED_PIN, GPIO.HIGH)  # status LED
+        exit()
+
+    time.sleep(0.5)
+
+print("Joystick detected!")
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
