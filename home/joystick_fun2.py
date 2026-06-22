@@ -916,6 +916,7 @@ try:
         axes = [round(joystick.get_axis(i), 2) for i in range(joystick.get_numaxes())]
 
         # ---- BUTTONS ----
+        buttons = [None]*11
         buttons = [joystick.get_button(i) for i in range(joystick.get_numbuttons())]
 
         # ---- HATS ----
@@ -976,10 +977,8 @@ try:
             print("LED Off")
 
         
-        elif buttons[10] == 1:
+        elif buttons[10] == 1 or buttons[11] == 1:
             break #R3 kiri
-        elif buttons[11] == 1:
-            break #R3 kanan
 
         time.sleep(0.05)
         #GPIO.cleanup()
