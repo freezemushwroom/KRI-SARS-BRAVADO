@@ -608,12 +608,18 @@ def stop():
 
 def tambah_speed(): 
     global waktu_sleep  
-    waktu_sleep = waktu_sleep - 0.1
+    if waktu_sleep > 0:
+        waktu_sleep = waktu_sleep - 0.01
+    else:
+        waktu_sleep = 0.01
     print("tambah speed")
 
 def kurang_speed(): 
     global waktu_sleep
-    waktu_sleep = waktu_sleep + 0.1
+    if waktu_sleep < 5.0:
+        waktu_sleep = waktu_sleep + 0.1
+    else:
+        waktu_sleep = 5.0
     print("kurang speed")
 
 def muter_kiri(): 
