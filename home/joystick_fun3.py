@@ -612,7 +612,7 @@ def tambah_speed():
         waktu_sleep = waktu_sleep - 0.01
     else:
         waktu_sleep = 0.01
-    print("tambah speed")
+    print(f"tambah speed: {waktu_sleep}")
 
 def kurang_speed(): 
     global waktu_sleep
@@ -620,7 +620,7 @@ def kurang_speed():
         waktu_sleep = waktu_sleep + 0.1
     else:
         waktu_sleep = 5.0
-    print("kurang speed")
+    print(f"kurang speed: {waktu_sleep}")
 
 def muter_kiri(): 
     #loop_print("muter kiri")
