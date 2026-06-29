@@ -610,7 +610,7 @@ def tambah_speed():
     global waktu_sleep  
     if waktu_sleep > 0:
         waktu_sleep = waktu_sleep - 0.01
-    else:
+    elif waktu_sleep <= 0:
         waktu_sleep = 0.01
     print(f"tambah speed: {waktu_sleep}")
 
