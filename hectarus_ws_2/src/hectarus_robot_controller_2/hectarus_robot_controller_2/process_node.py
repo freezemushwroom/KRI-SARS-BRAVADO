@@ -8,7 +8,7 @@ import time
 import RPi.GPIO as GPIO
 from adafruit_servokit import ServoKit
 import board
-import busio
+import busio#
 
 delay = 0.2
 
