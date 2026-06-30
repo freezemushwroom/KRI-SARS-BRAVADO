@@ -1066,10 +1066,3 @@ except KeyboardInterrupt:
         current_thread.join()
     print("\nStopped")
     pygame.quit()
-
-except KeyboardInterrupt:
-    stop_event.set()
-    if current_thread:
-        current_thread.join()
-    print("\nStopped")
-    pygame.quit()
