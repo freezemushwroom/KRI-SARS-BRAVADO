@@ -9,6 +9,18 @@ import math
 
 waktu_sleep = 0.2
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+#depan = 0, kanan = 1, kiri = 2, belakang = 3 
+TRIG = [19, 6, 22, 17, 21, 16, 25]
+ECHO = [26, 13, 5, 27, 20, 12, 24]
+for i in range (0,7):
+    GPIO.setup(TRIG[i],GPIO.OUT)
+    GPIO.output(TRIG[i], False)
+    GPIO.setup(ECHO[i],GPIO.IN)
+
+jarak = [0, 0, 0, 0]
 
 kit1 = ServoKit(channels = 16, address = 0x41) #, reference_clock_speed = 24930632)
 kit2 = ServoKit(channels = 16, address = 0x40) #, reference_clock_speed = 25220628)
@@ -20,6 +32,30 @@ for i in range (10):
 coxa = 2.55
 femur = 6.508
 tibia = 7.964
+
+def ultrasonic(TRIG, ECHO):
+    timeout = 100
+    GPIO.output(TRIG, True)
+    time.sleep(0.00001)
+    GPIO.output(TRIG, False)
+    pulse_start = time.time()
+    time_timeout = time.time()
+    while GPIO.input(ECHO)==0:
+        if ((time.time() - time_timeout) *1000) > timeout:
+            distance = 30
+            return distance
+        pulse_start = time.time()
+
+    while GPIO.input(ECHO)==1:
+        if ((time.time() - time_timeout) *1000) > timeout:
+            distance = 30
+            return distance
+        pulse_end = time.time()
+
+    pulse_duration = pulse_end - pulse_start
+    distance = pulse_duration * 17150
+    distance = round(distance, 2)
+    return distance
 
 def lebar(l):
     maju = 0
@@ -76,7 +112,7 @@ def maju():
             kit1.servo[0].angle = 180 - (i) #tibia3
             kit2.servo[11].angle = 0 + (i+10) #femur5
             kit2.servo[12].angle = 0 + (i) #tibia5
-        print("Femur Tibia 1 3 5 Turun")
+        #print("Femur Tibia 1 3 5 Turun")
         sleep(waktu_sleep)
         #coxa femur tibia 1 3 5 balik ke posisi awal
         kit1.servo[8].angle = 90 #coxa1
@@ -90,20 +126,20 @@ def maju():
         kit2.servo[10].angle = 90 #coxa5
         kit2.servo[11].angle = 55 #femur5
         kit2.servo[12].angle = 45 #tibia5
-        print("Coxa Femur Tibia 1 3 5 Balik")
+        #print("Coxa Femur Tibia 1 3 5 Balik")
         #sleep(0.05)
         #femur 2 4 6 ngangkat
         kit1.servo[4].angle = 180 #femur2
         kit2.servo[14].angle = 0 #femur4
         kit2.servo[8].angle = 0 #femur6
-        print("Femur 2 4 6 Ngangkat")
+        #print("Femur 2 4 6 Ngangkat")
         sleep(waktu_sleep)
 
         #coxa 2 4 6 maju
         kit1.servo[5].angle = 120 #coxa2
         kit2.servo[13].angle = 60 #coxa4
         kit2.servo[7].angle = 60 #coxa6
-        print("Coxa 2 4 6 Maju")
+        #print("Coxa 2 4 6 Maju")
         sleep(waktu_sleep)
 
         #femur 2 4 6 turun dan tibia turun sekalian adjust ngambil kaki
@@ -115,7 +151,7 @@ def maju():
             kit2.servo[8].angle = 0 + (i+10) #femur6
             kit2.servo[9].angle = 0 + (i) #tibia6
         
-        print("Femur Tibia 2 4 6 Turun")
+        #print("Femur Tibia 2 4 6 Turun")
         sleep(waktu_sleep)
         #coxa femur tibia 2 4 6 balik ke poisi awal
         kit1.servo[5].angle = 90 #coxa2
@@ -131,13 +167,13 @@ def maju():
         kit2.servo[7].angle = 90 #coxa6
         kit2.servo[8].angle = 55 #femur6
         kit2.servo[9].angle = 45 #tibia6
-        print("Coxa Femur Tibia 2 4 6 Balik")
+        #print("Coxa Femur Tibia 2 4 6 Balik")
         #sleep(0.05)
         #femur 1 3 5 ngangkat
         kit1.servo[7].angle = 180 #femur1
         kit1.servo[1].angle = 180 #femur3
         kit2.servo[11].angle = 0 #femur5
-        print("Femur 1 3 5 Ngangkat")
+        #print("Femur 1 3 5 Ngangkat")
         sleep(waktu_sleep)
         time.sleep(0.25)
         print(f"stopped")
@@ -149,7 +185,7 @@ def mundur():
         kit1.servo[8].angle = 60 #coxa1
         kit1.servo[2].angle = 60 #coxa3
         kit2.servo[10].angle = 120 #coxa5
-        print("Coxa 1 3 5 Maju")
+        ##print("Coxa 1 3 5 Maju")
         sleep(waktu_sleep)
         
 
@@ -161,7 +197,7 @@ def mundur():
             kit1.servo[0].angle = 180 - (i) #tibia3
             kit2.servo[11].angle = 0 + (i+10) #femur5
             kit2.servo[12].angle = 0 + (i) #tibia5
-        print("Femur Tibia 1 3 5 Turun")
+        #print("Femur Tibia 1 3 5 Turun")
         sleep(waktu_sleep)
         #coxa femur tibia 1 3 5 balik ke posisi awal
         kit1.servo[8].angle = 90 #coxa1
@@ -175,20 +211,20 @@ def mundur():
         kit2.servo[10].angle = 90 #coxa5
         kit2.servo[11].angle = 55 #femur5
         kit2.servo[12].angle = 45 #tibia5
-        print("Coxa Femur Tibia 1 3 5 Balik")
+        #print("Coxa Femur Tibia 1 3 5 Balik")
         #sleep(0.05)
         #femur 2 4 6 ngangkat
         kit1.servo[4].angle = 180 #femur2
         kit2.servo[14].angle = 0 #femur4
         kit2.servo[8].angle = 0 #femur6
-        print("Femur 2 4 6 Ngangkat")
+        #print("Femur 2 4 6 Ngangkat")
         sleep(waktu_sleep)
 
         #coxa 2 4 6 maju
         kit1.servo[5].angle = 60 #coxa2
         kit2.servo[13].angle = 120 #coxa4
         kit2.servo[7].angle = 120 #coxa6
-        print("Coxa 2 4 6 Maju")
+        #print("Coxa 2 4 6 Maju")
         sleep(waktu_sleep)
 
         #femur 2 4 6 turun dan tibia turun sekalian adjust ngambil kaki
@@ -200,7 +236,7 @@ def mundur():
             kit2.servo[8].angle = 0 + (i+10) #femur6
             kit2.servo[9].angle = 0 + (i) #tibia6
         
-        print("Femur Tibia 2 4 6 Turun")
+        #print("Femur Tibia 2 4 6 Turun")
         sleep(waktu_sleep)
         #coxa femur tibia 2 4 6 balik ke poisi awal
         kit1.servo[5].angle = 90 #coxa2
@@ -216,13 +252,13 @@ def mundur():
         kit2.servo[7].angle = 90 #coxa6
         kit2.servo[8].angle = 55 #femur6
         kit2.servo[9].angle = 45 #tibia6
-        print("Coxa Femur Tibia 2 4 6 Balik")
+        #print("Coxa Femur Tibia 2 4 6 Balik")
         #sleep(0.05)
         #femur 1 3 5 ngangkat
         kit1.servo[7].angle = 180 #femur1
         kit1.servo[1].angle = 180 #femur3
         kit2.servo[11].angle = 0 #femur5
-        print("Femur 1 3 5 Ngangkat")
+        #print("Femur 1 3 5 Ngangkat")
         sleep(waktu_sleep)
         time.sleep(0.25)
         print(f"stopped")
@@ -629,7 +665,7 @@ def muter_kiri():
         kit1.servo[8].angle = 60 #coxa1
         kit1.servo[2].angle = 60 #coxa3
         kit2.servo[10].angle = 60 #coxa5
-        print("Coxa 1 3 Mundur 5 Maju")
+        #print("Coxa 1 3 Mundur 5 Maju")
         sleep(waktu_sleep)
         
 
@@ -641,7 +677,7 @@ def muter_kiri():
             kit1.servo[0].angle = 180 - (i) #tibia3
             kit2.servo[11].angle = 0 + (i+10) #femur5
             kit2.servo[12].angle = 0 + (i) #tibia5
-        print("Femur Tibia 1 3 5 Turun")
+        #print("Femur Tibia 1 3 5 Turun")
         sleep(waktu_sleep)
         #coxa femur tibia 1 3 5 balik ke posisi awal
         kit1.servo[8].angle = 90 #coxa1
@@ -655,13 +691,13 @@ def muter_kiri():
         kit2.servo[10].angle = 90 #coxa5
         kit2.servo[11].angle = 55 #femur5
         kit2.servo[12].angle = 45 #tibia5
-        print("Coxa Femur Tibia 1 3 5 Balik")
+        #print("Coxa Femur Tibia 1 3 5 Balik")
         #sleep(0.05)
         #femur 2 4 6 ngangkat
         kit1.servo[4].angle = 180 #femur2
         kit2.servo[14].angle = 0 #femur4
         kit2.servo[8].angle = 0 #femur6
-        print("Femur 2 4 6 Ngangkat")
+        #print("Femur 2 4 6 Ngangkat")
         sleep(waktu_sleep)
 
         #coxa 2 mundur 4 6 maju
@@ -680,7 +716,7 @@ def muter_kiri():
             kit2.servo[8].angle = 0 + (i+10) #femur6
             kit2.servo[9].angle = 0 + (i) #tibia6
         
-        print("Femur Tibia 2 4 6 Turun")
+        #print("Femur Tibia 2 4 6 Turun")
         sleep(waktu_sleep)
         #coxa femur tibia 2 4 6 balik ke poisi awal
         kit1.servo[5].angle = 90 #coxa2
@@ -696,16 +732,16 @@ def muter_kiri():
         kit2.servo[7].angle = 90 #coxa6
         kit2.servo[8].angle = 55 #femur6
         kit2.servo[9].angle = 45 #tibia6
-        print("Coxa Femur Tibia 2 4 6 Balik")
+        #print("Coxa Femur Tibia 2 4 6 Balik")
         #sleep(0.05)
         #femur 1 3 5 ngangkat
         kit1.servo[7].angle = 180 #femur1
         kit1.servo[1].angle = 180 #femur3
         kit2.servo[11].angle = 0 #femur5
-        print("Femur 1 3 5 Ngangkat")
+        #print("Femur 1 3 5 Ngangkat")
         sleep(waktu_sleep)
         time.sleep(0.25)
-        print(f"stopped")
+        #print(f"stopped")
 
 def muter_kanan(): 
     #loop_print("muter kanan")
@@ -714,7 +750,7 @@ def muter_kanan():
         kit1.servo[8].angle = 120 #coxa1
         kit1.servo[2].angle = 120 #coxa3
         kit2.servo[10].angle = 120 #coxa5
-        print("Coxa 1 3 Maju 5 Mundur")
+        #print("Coxa 1 3 Maju 5 Mundur")
         sleep(waktu_sleep)
         
 
@@ -726,7 +762,7 @@ def muter_kanan():
             kit1.servo[0].angle = 180 - (i) #tibia3
             kit2.servo[11].angle = 0 + (i+10) #femur5
             kit2.servo[12].angle = 0 + (i) #tibia5
-        print("Femur Tibia 1 3 5 Turun")
+        #print("Femur Tibia 1 3 5 Turun")
         sleep(waktu_sleep)
         #coxa femur tibia 1 3 5 balik ke posisi awal
         kit1.servo[8].angle = 90 #coxa1
@@ -740,20 +776,20 @@ def muter_kanan():
         kit2.servo[10].angle = 90 #coxa5
         kit2.servo[11].angle = 55 #femur5
         kit2.servo[12].angle = 45 #tibia5
-        print("Coxa Femur Tibia 1 3 5 Balik")
+        #print("Coxa Femur Tibia 1 3 5 Balik")
         #sleep(0.05)
         #femur 2 4 6 ngangkat
         kit1.servo[4].angle = 180 #femur2
         kit2.servo[14].angle = 0 #femur4
         kit2.servo[8].angle = 0 #femur6
-        print("Femur 2 4 6 Ngangkat")
+        #print("Femur 2 4 6 Ngangkat")
         sleep(waktu_sleep)
 
         #coxa 2 4 6 maju
         kit1.servo[5].angle = 120 #coxa2
         kit2.servo[13].angle = 120 #coxa4
         kit2.servo[7].angle = 120 #coxa6
-        print("Coxa 2 Maju Coxa 4 6 Mundur")
+        #print("Coxa 2 Maju Coxa 4 6 Mundur")
         sleep(waktu_sleep)
 
         #femur 2 4 6 turun dan tibia turun sekalian adjust ngambil kaki
@@ -765,7 +801,7 @@ def muter_kanan():
             kit2.servo[8].angle = 0 + (i+10) #femur6
             kit2.servo[9].angle = 0 + (i) #tibia6
         
-        print("Femur Tibia 2 4 6 Turun")
+        #print("Femur Tibia 2 4 6 Turun")
         sleep(waktu_sleep)
         #coxa femur tibia 2 4 6 balik ke poisi awal
         kit1.servo[5].angle = 90 #coxa2
@@ -781,16 +817,16 @@ def muter_kanan():
         kit2.servo[7].angle = 90 #coxa6
         kit2.servo[8].angle = 55 #femur6
         kit2.servo[9].angle = 45 #tibia6
-        print("Coxa Femur Tibia 2 4 6 Balik")
+        #print("Coxa Femur Tibia 2 4 6 Balik")
         #sleep(0.05)
         #femur 1 3 5 ngangkat
         kit1.servo[7].angle = 180 #femur1
         kit1.servo[1].angle = 180 #femur3
         kit2.servo[11].angle = 0 #femur5
-        print("Femur 1 3 5 Ngangkat")
+        #print("Femur 1 3 5 Ngangkat")
         sleep(waktu_sleep)
         time.sleep(0.25)
-        print(f"stopped")
+        #print(f"stopped")
 
 def langsungBerdiri():
     for i in range (10):
@@ -838,10 +874,10 @@ def langsungBerdiri():
     else:
         suduttt = sudut
 
-    print("Sudut Femur 1 2 3 : " + str(sudut + 35))
-    print("Sudut Femur 4 5 6 : " + str((180-sudut) - 35))
-    print("Sudut Tibia 1 2 3 : " + str(sudutt + 45))
-    print("Sudut Tibia 4 5 6 : " + str((180-suduttt) - 45))
+    #print("Sudut Femur 1 2 3 : " + str(sudut + 35))
+    #print("Sudut Femur 4 5 6 : " + str((180-sudut) - 35))
+    #print("Sudut Tibia 1 2 3 : " + str(sudutt + 45))
+    #print("Sudut Tibia 4 5 6 : " + str((180-suduttt) - 45))
 
     kit1.servo[8].angle = 90 #coxa1
     kit2.servo[7].angle = 90 #coxa6
@@ -1057,6 +1093,8 @@ try:
 
         elif buttons[10] == 1 or buttons[11] == 1:
             break
+
+        print(f"depan = {ultrasonic(TRIG[0], ECHO[0])} cm, kanan = {ultrasonic(TRIG[1], ECHO[1])} cm, kiri = {ultrasonic(TRIG[2], ECHO[2])} cm, belakang = {ultrasonic(TRIG[3], ECHO[3])} cm")
 
         time.sleep(0.05)
 

@@ -1,7 +1,7 @@
 import time
 import RPi.GPIO as GPIO
 import pygame
-import rclpy
+#import rclpy
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -42,8 +42,8 @@ def ultrasonic(TRIG, ECHO):
 
 try:
     while True:
-        #print(f"depan = {ultrasonic(TRIG[0], ECHO[0])} cm, kanan = {ultrasonic(TRIG[1], ECHO[1])} cm, kiri = {ultrasonic(TRIG[2], ECHO[2])} cm, belakang = {ultrasonic(TRIG[3], ECHO[3])} cm")
-        get_logger().info(f"depan = {ultrasonic(TRIG[0], ECHO[0])} cm, kanan = {ultrasonic(TRIG[1], ECHO[1])} cm, kiri = {ultrasonic(TRIG[2], ECHO[2])} cm, belakang = {ultrasonic(TRIG[3], ECHO[3])} cm")
+        print(f"depan = {ultrasonic(TRIG[0], ECHO[0])} cm, kanan = {ultrasonic(TRIG[1], ECHO[1])} cm, kiri = {ultrasonic(TRIG[2], ECHO[2])} cm, belakang = {ultrasonic(TRIG[3], ECHO[3])} cm")
+        #get_logger().info(f"depan = {ultrasonic(TRIG[0], ECHO[0])} cm, kanan = {ultrasonic(TRIG[1], ECHO[1])} cm, kiri = {ultrasonic(TRIG[2], ECHO[2])} cm, belakang = {ultrasonic(TRIG[3], ECHO[3])} cm")
         #
 
 except KeyboardInterrupt:
