@@ -13,8 +13,9 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 #depan = 0, kanan = 1, kiri = 2, belakang = 3 
-TRIG = [19, 6, 22, 17, 21, 16, 25]
-ECHO = [26, 13, 5, 27, 20, 12, 24]
+# yang belakang masih belum akurat addressnya
+TRIG = [22,16, 6, 25, 21, 16, 25]
+ECHO = [21, 12, 13, 24, 20, 12, 24]
 for i in range (0,7):
     GPIO.setup(TRIG[i],GPIO.OUT)
     GPIO.output(TRIG[i], False)
