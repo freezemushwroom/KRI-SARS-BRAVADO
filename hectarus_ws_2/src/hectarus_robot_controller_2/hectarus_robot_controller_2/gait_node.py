@@ -187,6 +187,55 @@ class MyNode(Node):
                 forward_kanan_tengah = self.forward
             self.get_logger().info("Nilai Yaw Clamp: " + str(yaw))
             self.get_logger().info("Nilai Geser Mepet: " + str(self.mepet))
+            if gait == -1: #tripod_mundur
+                angle = Int32MultiArray()
+                # ================= REVERSE MOVEMENT =================
+                # direction = 1   -> forward
+                # direction = -1  -> reverse
+                direction = -1
+                reverse_kiri_tengah = direction * forward_kiri_tengah
+                reverse_kiri_depan_belakang = direction * forward_kiri_depan_belakang
+                reverse_kanan_tengah = direction * forward_kanan_tengah
+                reverse_kanan_depan_belakang = direction * forward_kanan_depan_belakang
+                # ================= KAKI TENGAH KIRI =================
+                base_coxa_tengah_kiri, coxa_femur_tengah_kiri, femur_tibia_tengah_kiri = IK_tengah(reverse_kiri_tengah,yaw,0,self.roll,self.mepet,self.tambah_tinggi_kaki_tengah)
+                base_coxa_tengah_kiri = base_coxa_tengah_kiri - base_coxa_tengah_berdiri
+                coxa_femur_tengah_kiri = coxa_femur_tengah_kiri - coxa_femur_tengah_berdiri
+                femur_tibia_tengah_kiri = femur_tibia_tengah_kiri - femur_tibia_tengah_berdiri
+                # ================= KAKI DEPAN KIRI =================
+                base_coxa_depan_kiri, coxa_femur_depan_kiri, femur_tibia_depan_kiri = IK_depan(reverse_kiri_depan_belakang,yaw,panjang_depan_belakang / 2,self.roll,self.mepet)
+                base_coxa_depan_kiri = base_coxa_depan_kiri - base_coxa_depan_berdiri
+                coxa_femur_depan_kiri = coxa_femur_depan_kiri - coxa_femur_depan_berdiri
+                femur_tibia_depan_kiri = femur_tibia_depan_kiri - femur_tibia_depan_berdiri
+                # ================= KAKI BELAKANG KIRI =================
+                base_coxa_belakang_kiri, coxa_femur_belakang_kiri, femur_tibia_belakang_kiri = IK_belakang(reverse_kiri_depan_belakang,yaw,panjang_depan_belakang / 2,self.roll,self.mundur,self.mepet)
+                base_coxa_belakang_kiri = base_coxa_belakang_kiri - base_coxa_belakang_berdiri
+                coxa_femur_belakang_kiri = coxa_femur_belakang_kiri - coxa_femur_belakang_berdiri
+                femur_tibia_belakang_kiri = femur_tibia_belakang_kiri - femur_tibia_belakang_berdiri
+                # ================= KAKI TENGAH KANAN =================
+                base_coxa_tengah_kanan, coxa_femur_tengah_kanan, femur_tibia_tengah_kanan = IK_tengah(reverse_kanan_tengah,-yaw,0,self.roll,-self.mepet,self.tambah_tinggi_kaki_tengah)
+                base_coxa_tengah_kanan = base_coxa_tengah_kanan - base_coxa_tengah_berdiri
+                coxa_femur_tengah_kanan = coxa_femur_tengah_kanan - coxa_femur_tengah_berdiri
+                femur_tibia_tengah_kanan = femur_tibia_tengah_kanan - femur_tibia_tengah_berdiri
+                # ================= KAKI DEPAN KANAN =================
+                base_coxa_depan_kanan, coxa_femur_depan_kanan, femur_tibia_depan_kanan = IK_depan(reverse_kanan_depan_belakang,-yaw,panjang_depan_belakang / 2,self.roll,-self.mepet)
+                base_coxa_depan_kanan = base_coxa_depan_kanan - base_coxa_depan_berdiri
+                coxa_femur_depan_kanan = coxa_femur_depan_kanan - coxa_femur_depan_berdiri
+                femur_tibia_depan_kanan = femur_tibia_depan_kanan - femur_tibia_depan_berdiri
+                # ================= KAKI BELAKANG KANAN =================
+                base_coxa_belakang_kanan, coxa_femur_belakang_kanan, femur_tibia_belakang_kanan = IK_belakang(reverse_kanan_depan_belakang,-yaw,panjang_depan_belakang / 2,self.roll,self.mundur,-self.mepet)
+                base_coxa_belakang_kanan = base_coxa_belakang_kanan - base_coxa_belakang_berdiri
+                coxa_femur_belakang_kanan = coxa_femur_belakang_kanan - coxa_femur_belakang_berdiri
+                femur_tibia_belakang_kanan = femur_tibia_belakang_kanan - femur_tibia_belakang_berdiri
+                # ================= NORMAL TRIPOD ANGLE DATA =================
+                angle.data = [int(base_coxa_tengah_kiri),int(coxa_femur_tengah_kiri) * self.flag,int(femur_tibia_tengah_kiri) * self.flag,int(base_coxa_depan_kiri),int(coxa_femur_depan_kiri) * self.flag,int(femur_tibia_depan_kiri) * self.flag,int(base_coxa_belakang_kiri),int(coxa_femur_belakang_kiri) * self.flag,int(femur_tibia_belakang_kiri) * self.flag,int(base_coxa_tengah_kanan),int(coxa_femur_tengah_kanan) * self.flag,int(femur_tibia_tengah_kanan) * self.flag,int(base_coxa_depan_kanan),int(coxa_femur_depan_kanan) * self.flag,int(femur_tibia_depan_kanan) * self.flag,int(base_coxa_belakang_kanan),int(coxa_femur_belakang_kanan) * self.flag,int(femur_tibia_belakang_kanan) * self.flag,int(coxa_femur_tengah_berdiri + 35),int(femur_tibia_tengah_berdiri - 45),int(coxa_femur_depan_berdiri + 35),int(femur_tibia_depan_berdiri - 45),int(coxa_femur_belakang_berdiri + 35),int(femur_tibia_belakang_berdiri - 45),self.mundur,self.delay]
+                # ================= IF FLAG == 0 =================
+                if self.flag == 0:
+                    angle.data = [int(base_coxa_tengah_kiri * 1.521739),int(0),int(0),int(base_coxa_depan_kiri * 2.30769),int(0),int(0),int(base_coxa_belakang_kiri * 0.8323),int(0),int(0),int(base_coxa_tengah_kanan * 1.221739),int(0),int(0),int(base_coxa_depan_kanan * 2.00769),int(0),int(0),int(base_coxa_belakang_kanan * 1.04176),int(0),int(0),int(coxa_femur_tengah_berdiri + 35),int(femur_tibia_tengah_berdiri - 45),int(coxa_femur_depan_berdiri + 35),int(femur_tibia_depan_berdiri - 45),int(coxa_femur_belakang_berdiri + 35),int(femur_tibia_belakang_berdiri - 45),self.mundur,self.delay]
+                self.get_logger().info(f"Published Reverse: {angle.data}")
+                self.get_logger().info("Sending Reverse Tripod Angle")
+                self.publish_tripod_angle.publish(angle)
+            
             if gait == 0: #tripod
                 angle = Int32MultiArray()
                 base_coxa_tengah_kiri, coxa_femur_tengah_kiri, femur_tibia_tengah_kiri = IK_tengah(forward_kiri_tengah, (yaw), 0, self.roll, self.mepet, self.tambah_tinggi_kaki_tengah)

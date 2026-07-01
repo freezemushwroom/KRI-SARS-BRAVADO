@@ -83,6 +83,16 @@ class MyNode(Node):
         self.flag = False
         self.constraint = 10
 
+        #dibawah adalah variabel penghitung langkah
+        self.forward_movement = 0
+        self.last_forward_movement = 0
+        self.backward_movement = 0
+        self.right_movement = 0
+        self.left_movement = 0
+        self.turn_left = 0
+        self.turn_right = 0
+        #
+
         self.loop = 0
 
         self.mode = 0
@@ -255,6 +265,149 @@ class MyNode(Node):
             self.stop = 0
         
         self.jarak[0] = ultrasonic(TRIG[0], ECHO[0]) #ultrasonic depan
+        self.get_logger().info("Jarak Depan: " + str(self.jarak[0]))
+        self.get_logger().info("Constraint " + str(self.constraint))
+        self.get_logger().info("Constraint Kiri: " + str(self.constraint_left))
+        state = Int32MultiArray()
+        calibrate = Int32()
+
+        if self.jarak[0] <= self.constraint: #kalo jarak depan lebih kecil dari constraintnya
+            # dibawah kita ngecek kiri dan kanan apakah ada dinding
+            wait(2)
+            state.data = [9,0] #berhenti
+            self.publish_state.publish(state)
+            wait(3)
+            self.jarak[1] = ultrasonic(TRIG[2], ECHO[2])
+            self.jarak[2] = ultrasonic(TRIG[5], ECHO[5])
+            self.get_logger().info("Jarak Kanan : " + str(self.jarak[1]))
+            self.get_logger().info("Jarak Kiri  : " + str(self.jarak[2]))
+            wait(1)
+            # disini cek apakah sudah pengambilan korban atau belum 
+            if self.mode == -1 or self.mode == -3: #brarti sudah mengambil korban dan belum mundur
+                # kita mundur dulu biar ultrasonik nggak kehalang
+                # ini buat mode -1 perpindahan ke mode -2
+                # atau mode -3 perpindahan ke mode -4
+                
+                # selesai belok kanan, sekarang siap taruh korban
+                # selesai taruh korban
+                # lalu kita mundur lagi
+                if self.mode == -1:
+                    self.data = [-1, 0] # mundur
+                    self.publish_state.publish(state)
+                    wait(1.2)
+                    for i in range(4):
+                        self.data = [2, 0] # belok kanan
+                        self.publish_state.publish(state)
+                        wait(1.2)
+                    self.data = [9, 0] # stop
+                    self.publish_state.publish(state)
+                    wait(1.2)
+                elif self.mode == -3:
+                    # sebenernya langsung taro korban aja
+                    self.data = [9, 0] # stop
+                    self.publish_state.publish(state)
+                # disini mdoe menaru korban
+                # selesai menaruh korban, sekarang kita mundur lagi
+                self.data = [-1, 0] # mundur
+                self.publish_state.publish(state)
+                for i in range(8):
+                    self.data = [1, 0] # belok kiri
+                    self.publish_state.publish(state)
+                    wait(1.2)
+                self.mode = self.mode -1 # sekarang mode -2
+                # atau menjadi -4
+                # sekarang kita kembali jalan maju 5 langkah 
+                self.last_forward_movement = self.forward_movement # simpan counter terakhir
+            if self.mode == -4 and self.forward_movement - self.last_forward_movement >= 3:
+                # disini sudah mode 4 yaitu strafe kiri, dan setidaknya sudah jalan maju 3 langkah dari titik terakhir, maka kita stop aja
+                state.data = [11,0] #strafe kiri
+                self.publish_state.publish(state)w
+                while True:
+                    state.data = [11,0]
+                    self.publish_state.publish(state)
+                    wait(2 + self.add_delay)
+                    self.jarak[2] = ultrasonic(TRIG[5], ECHO[5])
+                    self.get_logger().info("Jarak Kiri : " + str(self.jarak[2]))
+                    if self.jarak[2] <= self.constraint_left[0] and self.jarak[2] >= self.constraint_left[1]:
+                        # kalau masih strafe maak mode -2, kalau udah akhir maka mode -4
+                        if self.mode == -4: #setelah strafe kiri, yawnya berubah, constraintnya berubah
+                            self.mode = self.mode -1 # sekarang mode -5
+                            self.constraint = 20
+                            correction = Int32()
+                            correction.data = 20 # ini tuh biar yawnya balik ke 0, karena sebelumnya yawnya -20
+                            self.publish_correction.publish(correction)
+                            # karena mode 4, maka pas maju udah ada correctionnya
+                            break
+                        elif self.mode == -6: #udah mentok kiri sampai titik finish
+                            #looping stop
+                            #berhenti trus ngeluarin time elapsed#
+                            count_time = Int32()
+                            count_time.data = 1
+                            self.publish_count_time.publish(count_time)
+                            self.stop = 1
+                            #end of line#
+                            break # dari sini sudah return jadi selesai
+
+            elif self.mode == -5: # artinya lagi siapin buat ke tangga
+                # dari mode -5 ke -6
+                self.constraint = 0
+                flag_data = Int32()
+                flag_data.data = 0  
+                self.publish_correction.publish(flag_data)
+                flag_data.data = 1
+                self.publish_turn_on_roll.publish(flag_data)
+                self.mode = self.mode -1 # sekarang mode -6
+                # berarti persiapan buat naik tangga
+        else: # ini adalah mode 0 kalau tidak terdeteksi apapun
+            #kita akan mengukur berapa langkah kaki sampai korban pertama
+            if self.forward_movement < 7 or (self.forward_movement > 7 and (self.mode == -1 or self.mode == -4 or self.mode == -6)): # kita anggap 7 langkah dulu
+                # ini buat mode 0
+                # buat mode -2
+                # atau mode -4
+                state.data = [0,0] #maju
+                self.publish_state.publish(state)
+                self.forward_movement += 1
+            elif self.forward_movement == 7 or self.forward_movement - self.last_forward_movement == 5:
+                # move == 7(step ke korban pertama)
+                # delta move == 5 (step ke korban kedua)
+                # ini buat mode 0 dan perpindahan ke mode -1
+                # atau mode -2 ke mode -3
+                # putar kiri
+                state.data = [9,0] #berhenti
+                self.publish_state.publish(state)
+                wait(3)
+                state.data = [1,0] # disini kita belok kiri
+                self.publish_state.publish(state)
+                wait(1.2)
+                self.publish_state.publish(state)
+                wait(1.2)
+                self.publish_state.publish(state)
+                wait(1.2)
+                self.publish_state.publish(state)
+                wait(2)
+                # proses deteksi korban dan mengambil korban pertama
+                # end proses atau, atau end publish state  
+                calibrate.data = -1
+                self.mode = self.mode -1 # sekarang mode -1
+                # or mode -3
+                self.publish_calibrate.publish(calibrate)
+                wait(2)
+                state.data = [9,0] #stop
+                self.publish_state.publish(state)
+                wait(3)
+                # lalu putar kanan
+                state.data = [-1, 0] # mundur
+                self.publish_state.publish(state)
+                wait(1.2)
+                for i in range(4):
+                    self.data = [2, 0] # belok kanan
+                    self.publish_state.publish(state)
+                    wait(1.2)
+
+                
+
+# bagian kode dibawah kita ignore dulu
+        
         if self.mode == 0:
             # mode awal dan maju dulu lalu nanti belok kiri
             state.data = [0,0]

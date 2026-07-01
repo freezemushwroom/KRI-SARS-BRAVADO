@@ -439,7 +439,7 @@ class MyNode(Node):
 
     def getting_data(self, message:Int32MultiArray):
         info = Int32MultiArray()
-        self.send_yaw = self.yaw + (90*self.calibrate) + self.correction
+        self.send_yaw = self.yaw + (90*self.calibrate) + self.correction # data state ada di [2] dan [3] 
         info.data = [int(self.send_yaw), int(self.send_roll), int(message.data[0]), int(message.data[1]), int(self.send_pitch)]
         self.publish_maju.publish(info)
 
