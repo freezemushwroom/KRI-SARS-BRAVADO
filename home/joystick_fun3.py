@@ -1309,13 +1309,13 @@ print("\nLive Controller Monitor (Ctrl+C to stop)\n")
 
 # ================= MAIN LOOP =================
 def main(args=None):
+    rclpy.init(args=args)
+
     try:
-        rclpy.init(args=args)
+        node = BMX160AccelCheckNode()
+
         rclpy.spin(node)
 
-        node = BMX160AccelCheckNode()
-
-        node = BMX160AccelCheckNode()
         while True:
             pygame.event.pump()
 
