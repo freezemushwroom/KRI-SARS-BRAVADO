@@ -1302,7 +1302,6 @@ def wait_for_joystick():
         time.sleep(0.5)
 
 
-joystick = wait_for_joystick()
 
 print("\nLive Controller Monitor (Ctrl+C to stop)\n")
 
@@ -1310,6 +1309,8 @@ print("\nLive Controller Monitor (Ctrl+C to stop)\n")
 # ================= MAIN LOOP =================
 def main(args=None):
     rclpy.init(args=args)
+    joystick = wait_for_joystick()
+
 
     try:
         node = BMX160AccelCheckNode()
