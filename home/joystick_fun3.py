@@ -1309,12 +1309,11 @@ print("\nLive Controller Monitor (Ctrl+C to stop)\n")
 
 # ================= MAIN LOOP =================
 def main(args=None):
-    node = BMX160AccelCheckNode()
-
     try:
         rclpy.init(args=args)
         rclpy.spin(node)
 
+        node = BMX160AccelCheckNode()
 
         node = BMX160AccelCheckNode()
         while True:
