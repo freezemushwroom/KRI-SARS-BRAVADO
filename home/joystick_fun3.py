@@ -1318,7 +1318,8 @@ def main(args=None):
         while True:
             pygame.event.pump()
 
-            #rclpy.spin_once(node, timeout_sec=0.01)
+            rclpy.spin_once(node, timeout_sec=0.0)
+            #rclpy.spin(node)
 
             # ---- CHECK JOYSTICK STILL VALID ----
             try:
