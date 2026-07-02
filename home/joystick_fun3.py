@@ -1314,10 +1314,10 @@ def main(args=None):
     try:
         node = BMX160AccelCheckNode()
 
-        rclpy.spin(node)
-
         while True:
             pygame.event.pump()
+
+            rclpy.spin_once(node, timeout_sec=0.01)
 
             # ---- CHECK JOYSTICK STILL VALID ----
             try:
