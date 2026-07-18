@@ -99,13 +99,13 @@ class LocationStateChecker(Node):
         if len(msg.data) < 7:
             return
 
-        self.left_front = float(msg.data[0])
-        self.left       = float(msg.data[1])
-        self.left_rear  = float(msg.data[2])
-        self.back       = float(msg.data[3])
-        self.right_front= float(msg.data[4])
-        self.right      = float(msg.data[5])
-        self.front      = float(msg.data[6])
+        self.left_front = float(msg.data[0])/100.0
+        self.left       = float(msg.data[1])/100.0
+        self.left_rear  = float(msg.data[2])/100.0
+        self.back       = float(msg.data[3])/100.0
+        self.right_front= float(msg.data[4])/100.0
+        self.right      = float(msg.data[5])/100.0
+        self.front      = float(msg.data[6])/100.0
 
     # ---------- Helper ----------
 
