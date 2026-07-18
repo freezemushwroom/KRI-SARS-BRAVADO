@@ -321,7 +321,7 @@ class MyNode(Node):
             if self.mode == -4 and self.forward_movement - self.last_forward_movement >= 3:
                 # disini sudah mode 4 yaitu strafe kiri, dan setidaknya sudah jalan maju 3 langkah dari titik terakhir, maka kita stop aja
                 state.data = [11,0] #strafe kiri
-                self.publish_state.publish(state)w
+                self.publish_state.publish(state)
                 while True:
                     state.data = [11,0]
                     self.publish_state.publish(state)
@@ -407,7 +407,7 @@ class MyNode(Node):
                 
 
 # bagian kode dibawah kita ignore dulu
-        
+        '''
         if self.mode == 0:
             # mode awal dan maju dulu lalu nanti belok kiri
             state.data = [0,0]
@@ -437,7 +437,7 @@ class MyNode(Node):
         else:
             # exception saja
 
-        #
+        #'''
 
 def main(args=None):
     rclpy.init(args=args)
