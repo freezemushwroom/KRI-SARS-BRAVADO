@@ -234,10 +234,10 @@ class LocationStateChecker(Node):
             self.get_logger().info("Waiting for ultrasonic readings...")
             return
 
-        front=self.front/100.0
-        left=self.left/100.0
-        right=self.right/100.0
-        back=self.back/100.0
+        front=self.front
+        left=self.left
+        right=self.right
+        back=self.back
 
         # Ignore invalid ultrasonic readings
         if front<0 or left<0 or right<0 or back<0:
@@ -249,7 +249,7 @@ class LocationStateChecker(Node):
         #==========================
         if self.state==1:
 
-            if self.yaw0() and back<0.85 and (0<=front<0.01 or front>0.9):
+            if self.yaw0() and back<85 and (0<=front<1 or front>0.90):
                 if self.pitch>13.0:
                     self.change_state(2, "B_beta") # kita make ini buat tetrapod di kemiringan
                     return
@@ -265,7 +265,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==2:
 
-            if -1<=self.pitch<=1 and front <= 0.07:
+            if -1<=self.pitch<=1 and front <= 7:
                 self.change_state(3,"B") # putar kiri
 
         #==========================
@@ -283,7 +283,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==4:
 
-            if back>0.55 and (left<0.28 or right<0.28):
+            if back>55 and (left<28 or right<28):
                 self.change_state(5,"C") # maju
 
         #==========================
@@ -291,7 +291,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==5:
 
-            if self.yaw90() and back>0.75 and front<0.12:
+            if self.yaw90() and back>75 and front<12:
                 self.change_state(6,"D") # putar kiri
 
         #==========================
@@ -308,7 +308,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==7:
 
-            if back>0.55 and front<0.15 and right<0.15:
+            if back>55 and front<15 and right<15:
                 self.change_state(8,"E") # stop
 
         #==========================
@@ -316,7 +316,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==8:
 
-            if back>0.60 and front<0.12 and right<0.20:
+            if back>60 and front<12 and right<20:
                 self.change_state(9,"F") # stop
 
         #==========================
