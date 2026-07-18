@@ -2,22 +2,32 @@
 
 import time
 
+import RPi.GPIO as GPIO
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Int32MultiArray
 
-import RPi.GPIO as GPIO
 
-
-# ---------------- GPIO Setup ----------------
+# ===============================
+# GPIO Configuration
+# ===============================
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 TRIG = [19, 6, 22, 14, 21, 16, 23]
-ECHO = [26, 13, 5, 25, 20, 12, 24]
-# 1, 2, 3, 4, 5, 6, 7
-# kiri depan, kiri, kiri belakang, belakang, kanan depan, kanan, depan
+ECHO = [26, 13, 5, 15, 20, 12, 24]
+
+SENSOR_NAMES = [
+    "Left Front",
+    "Left",
+    "Left Rear",
+    "Rear",
+    "Right Front",
+    "Right",
+    "Front"
+]
 
 NUM_SENSORS = len(TRIG)
 
@@ -30,11 +40,13 @@ for i in range(NUM_SENSORS):
 time.sleep(2)
 
 
-# ---------------- Ultrasonic Function ----------------
+# ===============================
+# Ultrasonic Function
+# ===============================
 
 def ultrasonic(trig, echo):
 
-    timeout = 100  # milliseconds
+    timeout_ms = 100
 
     GPIO.output(trig, True)
     time.sleep(0.00001)
@@ -43,33 +55,34 @@ def ultrasonic(trig, echo):
     pulse_start = time.time()
     pulse_end = time.time()
 
-    timeout_start = time.time()
+    timeout = time.time()
 
     while GPIO.input(echo) == 0:
         pulse_start = time.time()
 
-        if (time.time() - timeout_start) * 1000 > timeout:
-            return 300
+        if (time.time() - timeout) * 1000 > timeout_ms:
+            return -1
 
     while GPIO.input(echo) == 1:
         pulse_end = time.time()
 
-        if (time.time() - timeout_start) * 1000 > timeout:
-            return 300
+        if (time.time() - timeout) * 1000 > timeout_ms:
+            return -1
 
     pulse_duration = pulse_end - pulse_start
 
     distance = pulse_duration * 17150
 
-    return int(round(distance))
+    return round(distance, 2)
 
 
-# ---------------- ROS2 Node ----------------
+# ===============================
+# ROS2 Node
+# ===============================
 
 class UltrasonicReader(Node):
 
     def __init__(self):
-
         super().__init__("ultrasonic_reader")
 
         self.publisher = self.create_publisher(
@@ -78,32 +91,36 @@ class UltrasonicReader(Node):
             10
         )
 
-        # Read every 100 ms
-        self.timer = self.create_timer(0.1, self.read_ultrasonic)
+        # Read every 0.2 seconds
+        self.timer = self.create_timer(0.2, self.read_sensors)
 
-    def read_ultrasonic(self):
+    def read_sensors(self):
 
         distances = []
+
+        print("\n==============================")
 
         for i in range(NUM_SENSORS):
 
             distance = ultrasonic(TRIG[i], ECHO[i])
-            distances.append(distance)
+            distances.append(int(distance))
 
-            # Small delay prevents ultrasonic interference
-            time.sleep(0.01)
+            if distance == -1:
+                print(f"{SENSOR_NAMES[i]:12}: Timeout")
+            else:
+                print(f"{SENSOR_NAMES[i]:12}: {distance:.2f} cm")
+
+            # Small delay to reduce ultrasonic cross-talk
+            time.sleep(0.02)
 
         msg = Int32MultiArray()
         msg.data = distances
-
         self.publisher.publish(msg)
 
-        self.get_logger().info(
-            f"Distances (cm): {distances}"
-        )
 
-
-# ---------------- Main ----------------
+# ===============================
+# Main
+# ===============================
 
 def main(args=None):
 
@@ -117,11 +134,10 @@ def main(args=None):
     except KeyboardInterrupt:
         pass
 
-    GPIO.cleanup()
-
-    node.destroy_node()
-
-    rclpy.shutdown()
+    finally:
+        GPIO.cleanup()
+        node.destroy_node()
+        rclpy.shutdown()
 
 
 if __name__ == "__main__":
