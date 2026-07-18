@@ -98,17 +98,10 @@ class UltrasonicReader(Node):
 
         distances = []
 
-        print("\n==============================")
-
         for i in range(NUM_SENSORS):
 
             distance = ultrasonic(TRIG[i], ECHO[i])
             distances.append(int(distance))
-
-            if distance == -1:
-                print(f"{SENSOR_NAMES[i]:12}: Timeout")
-            else:
-                print(f"{SENSOR_NAMES[i]:12}: {distance:.2f} cm")
 
             # Small delay to reduce ultrasonic cross-talk
             time.sleep(0.02)
@@ -116,6 +109,17 @@ class UltrasonicReader(Node):
         msg = Int32MultiArray()
         msg.data = distances
         self.publisher.publish(msg)
+
+        # Print horizontally
+        print(
+            f"LF:{distances[0]:3}  "
+            f"L:{distances[1]:3}  "
+            f"LR:{distances[2]:3}  "
+            f"R:{distances[3]:3}  "
+            f"RF:{distances[4]:3}  "
+            f"RR:{distances[5]:3}  "
+            f"F:{distances[6]:3}"
+        )
 
 
 # ===============================
