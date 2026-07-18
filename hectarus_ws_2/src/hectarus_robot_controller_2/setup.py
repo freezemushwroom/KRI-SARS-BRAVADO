@@ -27,6 +27,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            "count_time= = hectarus_robot_controller_2.count_time_node.py",
         ],
     },
 )
