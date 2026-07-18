@@ -240,7 +240,7 @@ class LocationStateChecker(Node):
         back=self.back
 
         # Ignore invalid ultrasonic readings
-        if front<0 or left<0 or right<0 or back<0:
+        if front<0.001 or left<0.001 or right<0.001 or back<0.001:
             self.get_logger().info("Invalid ultrasonic readings, ignoring...")
             return
 
