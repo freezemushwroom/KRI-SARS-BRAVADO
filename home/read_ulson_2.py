@@ -16,8 +16,8 @@ from std_msgs.msg import Int32MultiArray
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-TRIG = [19, 6, 22, 14, 21, 16, 23]
-ECHO = [26, 13, 5, 15, 20, 12, 24]
+TRIG = [19, 6, 22, 14, 21, 16, 24]
+ECHO = [26, 13, 5, 25, 20, 12, 23]
 
 SENSOR_NAMES = [
     "Left Front",
