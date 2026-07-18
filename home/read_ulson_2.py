@@ -17,7 +17,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 TRIG = [19, 6, 22, 27, 21, 16, 23]
-ECHO = [26, 13, 5, 25, 20, 12, 24]
+ECHO = [26, 13, 5, 22, 20, 12, 24]
 
 SENSOR_NAMES = [
     "Left Front",
