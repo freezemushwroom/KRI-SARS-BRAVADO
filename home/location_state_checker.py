@@ -250,9 +250,9 @@ class LocationStateChecker(Node):
         if self.state==1:
 
             if self.yaw0() and back<85 and (0<=front<1 or front>0.90):
-                if self.pitch>13.0:
-                    self.change_state(2, "B_beta") # kita make ini buat tetrapod di kemiringan
-                    return
+                #if self.pitch>13.0:
+                self.change_state(2, "B_beta") # kita make ini buat tetrapod di kemiringan
+                #return
                 
             self.publish_state(1,"A") # maju
 
