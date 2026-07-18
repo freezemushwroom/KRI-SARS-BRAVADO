@@ -16,6 +16,8 @@ GPIO.setwarnings(False)
 
 TRIG = [19, 6, 22, 17, 21, 16, 25]
 ECHO = [26, 13, 5, 27, 20, 12, 24]
+# 1, 2, 3, 4, 5, 6, 7
+# kiri depan, kiri, kiri belakang, -, kanan depan, kanan, -
 
 NUM_SENSORS = len(TRIG)
 
