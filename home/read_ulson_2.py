@@ -112,13 +112,13 @@ class UltrasonicReader(Node):
 
         # Print horizontally
         print(
-            f"LF:{distances[0]:3}  "
-            f"L:{distances[1]:3}  "
-            f"LR:{distances[2]:3}  "
-            f"R:{distances[3]:3}  "
-            f"RF:{distances[4]:3}  "
-            f"RR:{distances[5]:3}  "
-            f"F:{distances[6]:3}"
+            f"Depan_kiri:{distances[0]:3}  "
+            f"kiri:{distances[1]:3}  "
+            f"Belakang_kiri:{distances[2]:3}  "
+            f"Belakang:{distances[3]:3}  "
+            f"Depan_kanan:{distances[4]:3}  "
+            f"kanan:{distances[5]:3}  "
+            f"depan:{distances[6]:3}"
         )
 
 
