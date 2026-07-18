@@ -14,10 +14,10 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-TRIG = [19, 6, 22, 17, 21, 16, 25]
-ECHO = [26, 13, 5, 27, 20, 12, 24]
+TRIG = [19, 6, 22, 14, 21, 16, 23]
+ECHO = [26, 13, 5, 25, 20, 12, 24]
 # 1, 2, 3, 4, 5, 6, 7
-# kiri depan, kiri, kiri belakang, -, kanan depan, kanan, -
+# kiri depan, kiri, kiri belakang, belakang, kanan depan, kanan, depan
 
 NUM_SENSORS = len(TRIG)
 
