@@ -99,13 +99,13 @@ class LocationStateChecker(Node):
         if len(msg.data) < 7:
             return
 
-        self.left_front = float(msg.data[0])/100.0
-        self.left       = float(msg.data[1])/100.0
-        self.left_rear  = float(msg.data[2])/100.0
-        self.back       = float(msg.data[3])/100.0
-        self.right_front= float(msg.data[4])/100.0
-        self.right      = float(msg.data[5])/100.0
-        self.front      = float(msg.data[6])/100.0
+        self.left_front = float(msg.data[0])
+        self.left       = float(msg.data[1])
+        self.left_rear  = float(msg.data[2])
+        self.back       = float(msg.data[3])
+        self.right_front= float(msg.data[4])
+        self.right      = float(msg.data[5])
+        self.front      = float(msg.data[6])
 
     # ---------- Helper ----------
 
@@ -234,13 +234,13 @@ class LocationStateChecker(Node):
             self.get_logger().info("Waiting for ultrasonic readings...")
             return
 
-        front=self.front
-        left=self.left
-        right=self.right
-        back=self.back
+        front=self.front/100.0
+        left=self.left/100.0
+        right=self.right/100.0
+        back=self.back/100.0
 
         # Ignore invalid ultrasonic readings
-        if front<0.001 or left<0.001 or right<0.001 or back<0.001:
+        if front<0 or left<0 or right<0 or back<0:
             self.get_logger().info("Invalid ultrasonic readings, ignoring...")
             return
 
