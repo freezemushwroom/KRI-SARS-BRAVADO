@@ -254,10 +254,10 @@ class LocationStateChecker(Node):
                     self.change_state(2, "B_beta") # kita make ini buat tetrapod di kemiringan
                 return
                 
-            self.publish_state(1,"A") # maju
+            #self.publish_state(1,"A") # maju
 
-            #else:
-                #self.change_state(1,"A")
+            else:
+                self.change_state(1,"A")
 
 
         #==========================
