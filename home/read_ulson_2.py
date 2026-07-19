@@ -61,13 +61,13 @@ def ultrasonic(trig, echo):
         pulse_start = time.time()
 
         if (time.time() - timeout) * 1000 > timeout_ms:
-            return -1
+            return 0.0 # -1 # kita buat reutrn 0 aja
 
     while GPIO.input(echo) == 1:
         pulse_end = time.time()
 
         if (time.time() - timeout) * 1000 > timeout_ms:
-            return -1
+            return 0.0 #-1 # ktia buat return 0 aja
 
     pulse_duration = pulse_end - pulse_start
 
