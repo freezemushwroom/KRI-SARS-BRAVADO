@@ -107,6 +107,8 @@ class UltrasonicReader(Node):
             time.sleep(0.02)
 
         msg = Int32MultiArray()
+        if distance < 0.0 or distance > 150:
+            distance = 0.0
         msg.data = distances
         self.publisher.publish(msg)
 
