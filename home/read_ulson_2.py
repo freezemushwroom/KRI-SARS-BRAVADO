@@ -72,6 +72,8 @@ def ultrasonic(trig, echo):
     pulse_duration = pulse_end - pulse_start
 
     distance = pulse_duration * 17150
+    if distance < 0.0 or distance > 150.0:
+        distance = 0
 
     return round(distance, 2)
 
