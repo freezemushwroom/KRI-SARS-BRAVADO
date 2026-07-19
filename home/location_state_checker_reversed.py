@@ -101,11 +101,11 @@ class LocationStateChecker(Node):
 
         self.left_front = float(msg.data[0]) #original LF = 0
         self.left       = float(msg.data[5]) #original L = 1
-        self.left_rear  = float(msg.data[2]) #original LR = 2
+        self.left_rear  = float(msg.data[3]) #original LR = 2
         self.back       = float(msg.data[6]) #original B = 3
         self.right_front= float(msg.data[4]) #original RF = 4
         self.right      = float(msg.data[1]) #original R = 5
-        self.front      = float(msg.data[3]) #original F = 6
+        self.front      = float(msg.data[2]) #original F = 6
 
     # ---------- Helper ----------
 
