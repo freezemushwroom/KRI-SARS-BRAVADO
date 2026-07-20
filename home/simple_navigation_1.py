@@ -253,12 +253,12 @@ class NavigationController(Node):
                     self.correcting_state = True
                     self.get_logger().info("Leaning Right(q3)")
                 
-                elif self.deviation_right_dist < 0.14:
+                elif self.deviation_right_dist < 14:
                     self.rightdist_dev_value = self.deviation_right_dist
                     self.correcting_state_strafe = True
                     self.get_logger().info("Close to right wall")
                 
-                elif self.deviation_left_dist < 0.14:
+                elif self.deviation_left_dist < 14:
                     self.leftdist_dev_value = self.deviation_left_dist
                     self.correcting_state_strafe = True
                     self.get_logger().info("Close to left wall")
@@ -358,8 +358,8 @@ class NavigationController(Node):
                         self.yaw_dev_value = self.deviation_yaw
             
             if self.correcting_state_strafe == True:
-                if self.rightdist_dev_value < 0.17:
-                    if self.deviation_right_dist < 0.14:
+                if self.rightdist_dev_value < 17:
+                    if self.deviation_right_dist < 14:
                         step = "strafe_left"
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
@@ -368,8 +368,8 @@ class NavigationController(Node):
                         self.get_logger().info("STOP - done strafe_left")
                         self.rightdist_dev_value = self.deviation_right_dist
                         self.get_logger().info(f"{self.rightdist_dev_value}")
-                elif self.leftdist_dev_value < 0.17:
-                    if self.deviation_left_dist < 0.14:
+                elif self.leftdist_dev_value < 17:
+                    if self.deviation_left_dist < 14:
                         step = "strafe_right"
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
