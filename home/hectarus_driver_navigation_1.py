@@ -771,7 +771,7 @@ class MovementExecutor(Node):
             # Forward
             # =============================
 
-            if forward > 0:
+            if forward > 0 and strafe == 0.0 and rotate == 0.0:
 
                 if self.tetrapod_mode:
                     self.get_logger().info("Tetrapod Forward")
@@ -786,7 +786,7 @@ class MovementExecutor(Node):
             # Turn Left
             # =============================
 
-            elif rotate > 0:
+            elif rotate > 0 and forward == 0.0 and strafe == 0.0:
 
                 self.get_logger().info("Turn Left")
                 putar_kiri()
@@ -795,7 +795,7 @@ class MovementExecutor(Node):
             # Turn Right
             # =============================
 
-            elif rotate < 0:
+            elif rotate < 0 and forward == 0.0 and strafe == 0.0:
 
                 self.get_logger().info("Turn Right")
                 putar_kanan()
@@ -804,7 +804,7 @@ class MovementExecutor(Node):
             # Strafe Left
             # =============================
 
-            elif strafe < 0:
+            elif strafe < 0 and forward == 0.0 and rotate == 0.0:
 
                 self.get_logger().info("Strafe Left")
                 jalan_kiri_miring()
@@ -813,7 +813,7 @@ class MovementExecutor(Node):
             # Strafe Right
             # =============================
 
-            elif strafe > 0:
+            elif strafe > 0 and forward == 0.0 and rotate == 0.0:
 
                 self.get_logger().info("Strafe Right")
                 jalan_kanan_miring()
