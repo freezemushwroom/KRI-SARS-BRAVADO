@@ -74,7 +74,7 @@ class LocationStateChecker(Node):
             0.2,
             self.timeout_monitor
         )
-        self.publish_state(self.state,"A")
+        #self.publish_state(self.state,"A")
 
 
     # ---------- Callbacks ----------
