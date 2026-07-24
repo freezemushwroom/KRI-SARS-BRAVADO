@@ -714,20 +714,20 @@ class MovementExecutor(Node):
             Float32MultiArray,
             "/cmd_movement",
             self.cmd_callback,
-            10
+            1
         )
 
         self.create_subscription(
             Bool,
             "/move_tetrapod",
             self.tetrapod_callback,
-            10
+            1
         )
 
         self.pub_state = self.create_publisher(
             Bool,
             "/movement_state",
-            10
+            1
         )
 
         self.get_logger().info("Movement Executor Started")
@@ -821,6 +821,7 @@ class MovementExecutor(Node):
             else:
 
                 self.get_logger().info("No movement command.")
+
             self.publish_state(False)
 
         finally:
