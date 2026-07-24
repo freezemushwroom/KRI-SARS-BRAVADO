@@ -155,6 +155,7 @@ def maju():
         sleep(waktu_sleep)
         time.sleep(0.25)
         print(f"stopped maju")
+        break
 
 def putar_kiri(): 
     #loop_print("muter kiri")
@@ -240,6 +241,7 @@ def putar_kiri():
         sleep(waktu_sleep)
         time.sleep(0.25)
         print(f"stopped putar kiri")
+        break
 
 def putar_kanan(): 
     #loop_print("muter kanan")
@@ -325,6 +327,7 @@ def putar_kanan():
         sleep(waktu_sleep)
         time.sleep(0.25)
         print(f"stopped putar kanan")
+        break
 
 
 def jalan_kiri_miring(): 
@@ -510,6 +513,7 @@ def jalan_kiri_miring():
         kit2.servo[9].angle = data[12+9] #tibia6
         time.sleep(0.25)
         print(f"stopped strafe kiri")
+        break
 
 
 def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
@@ -695,6 +699,7 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         kit2.servo[9].angle = data[12+9] #tibia6
         time.sleep(0.25)
         print(f"stopped strafe kanan")
+        break
 
 
 def tetrapod_maju():
