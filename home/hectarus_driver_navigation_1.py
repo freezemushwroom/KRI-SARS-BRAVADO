@@ -822,7 +822,11 @@ class MovementExecutor(Node):
 
                 self.get_logger().info("No movement command.")
 
-            self.publish_state(False)
+            forward = 0.0
+            strafe = 0.0
+            rotate = 0.0
+
+            #self.publish_state(False)
 
         finally:
 
