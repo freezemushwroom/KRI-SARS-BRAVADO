@@ -147,8 +147,9 @@ class NavigationController(Node):
         self.create_timer(2.0, self.location_callback) # location_callback jadi function jalan
     
     def rpy_callback(self, msg):
-        if len(msg.data)>=3 and self.movement_state == False:
-            self.deviation_roll, self.deviation_pitch, self.deviation_yaw = msg.data[:3]
+        if self.movement_state == False:
+            if len(msg.data)>=3:
+                self.deviation_roll, self.deviation_pitch, self.deviation_yaw = msg.data[:3]
         else:
             self.get_logger().info("Robot is moving, not getting any info (rpy)")
     
