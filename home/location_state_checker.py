@@ -152,7 +152,7 @@ class LocationStateChecker(Node):
         self.pub.publish(msg)
 
         self.get_logger().info(
-            f"Try(teleop)=({1})"
+            f"Try(joystick)=({1})"
             f"State={self.state_str} | "
             f"Yaw={self.yaw:.1f} Pitch={self.pitch:.1f} | "
             f"LF={self.left_front:.1f}"
@@ -249,15 +249,15 @@ class LocationStateChecker(Node):
         #==========================
         if self.state==1:
 
-            if self.yaw0() and back<85 and (0<=front<1 or front>0.90):
+            if self.yaw0() and back<85 and (20<=front<80):
                 if self.pitch>13.0:
                     self.change_state(2, "B_beta") # kita make ini buat tetrapod di kemiringan
                 return
                 
-            self.publish_state(1,"A") # maju
+            #self.publish_state(1,"A") # maju
 
-            #else:
-                #self.change_state(1,"A")
+            else:
+                self.change_state(1,"A")
 
 
         #==========================
@@ -265,7 +265,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==2:
 
-            if -1<=self.pitch<=1 and front <= 10:
+            if -1<=self.pitch<=1 and front <= 7:
                 self.change_state(3,"B") # putar kiri
 
         #==========================
