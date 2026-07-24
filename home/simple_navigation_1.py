@@ -131,7 +131,7 @@ class NavigationController(Node):
             "/movement_state",
             #"/motion_complete", # awalnya /movement_state yaitu dari gazebo joint pblisher, tapi kita ganti biar bisa pasti sama acceleration value
             self.movement_state_callback,
-            1
+            10
         )
         self.sub_timeout = self.create_subscription(
             Bool,
