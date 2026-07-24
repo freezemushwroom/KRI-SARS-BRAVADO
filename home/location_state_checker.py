@@ -70,10 +70,10 @@ class LocationStateChecker(Node):
         self.create_subscription(Float32MultiArray,'/cv_location_state',self.cv_location_state_callback,1)
 
         self.create_timer(0.05,self.check_state)
-        self.create_timer(
-            0.2,
-            self.timeout_monitor
-        )
+        #self.create_timer(
+        #    0.2,
+        #    self.timeout_monitor
+        #)
         self.publish_state(self.state,"A")
 
 
