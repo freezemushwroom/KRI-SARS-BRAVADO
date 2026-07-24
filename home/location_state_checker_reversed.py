@@ -65,7 +65,7 @@ class LocationStateChecker(Node):
             Int32MultiArray,
             "/ultrasonic",
             self.ultrasonic_cb,
-            10
+            1
         )
         self.create_subscription(Float32MultiArray,'/cv_location_state',self.cv_location_state_callback,1)
 
