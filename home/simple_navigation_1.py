@@ -150,7 +150,7 @@ class NavigationController(Node):
         if len(msg.data)>=3 and self.movement_state == False:
             self.deviation_roll, self.deviation_pitch, self.deviation_yaw = msg.data[:3]
         else:
-            self.get_logger().info("Robot is moving, not getting any info")
+            self.get_logger().info("Robot is moving, not getting any info (rpy)")
     
     def movement_state_callback(self, msg):
         self.movement_state = msg.data # kita atur not karna /motion_complete itu kebalikan datanya untuk /movement_state saat memberikan informasi yang sama
@@ -160,13 +160,13 @@ class NavigationController(Node):
         if self.movement_state == False: 
             if msg.data:self.deviation_left_dist = msg.data[0]
         else:
-            self.get_logger().info("Robot is moving, not getting any info")
+            self.get_logger().info("Robot is moving, not getting any info (uls)")
     
     def right_dist_callback(self, msg):
         if self.movement_state == False:
             if msg.data:self.deviation_right_dist = msg.data[0]
         else:
-            self.get_logger().info("Robot is moving, not getting any info")
+            self.get_logger().info("Robot is moving, not getting any info (right)")
     
     def front_dist_callback(self,msg):
         if not self.movement_state:
@@ -215,7 +215,7 @@ class NavigationController(Node):
                 return
             self.location_state_val = msg.data[0]
         else:
-            self.get_logger().info("Robot is moving, not getting any info")
+            self.get_logger().info("Robot is moving, not getting any info (loca)")
 
     def location_callback(self):
         step = String
