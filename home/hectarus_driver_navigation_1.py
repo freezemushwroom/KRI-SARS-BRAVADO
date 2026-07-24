@@ -821,6 +821,7 @@ class MovementExecutor(Node):
             else:
 
                 self.get_logger().info("No movement command.")
+            self.publish_state(False)
 
         finally:
 
