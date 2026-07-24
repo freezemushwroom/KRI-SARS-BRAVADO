@@ -109,13 +109,13 @@ class NavigationController(Node):
             Int32MultiArray,
             "/ultrasonic",
             self.ultrasonic_cb,
-            10
+            1
         )
 
         self.pub_tetrapod_gait = self.create_publisher(
             Bool,
             "/move_tetrapod",
-            10
+            1
         )
 
         # ini subsciber buat debugging aja
@@ -137,7 +137,7 @@ class NavigationController(Node):
             Bool,
             "/navigation_timeout",
             self.timeout_callback,
-            10
+            1
         )
 
         self.current_state = Float32MultiArray()
