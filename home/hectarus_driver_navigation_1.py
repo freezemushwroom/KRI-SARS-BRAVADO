@@ -760,73 +760,79 @@ class MovementExecutor(Node):
             daemon=True
         ).start()
 
-    def execute_command(self, forward, strafe, rotate):
+    def cmd_callback(self, msg):
+
+        if self.busy:
+            self.get_logger().warn("Robot is busy.")
+            return
+
+        if len(msg.data) < 3:
+            return
 
         self.busy = True
         self.publish_state(True)
 
+        forward = msg.data[0]
+        strafe = msg.data[1]
+        rotate = msg.data[2]
+
         try:
 
-            # =============================
+            # ==========================
             # Forward
-            # =============================
+            # ==========================
 
-            if forward > 0 and strafe == 0.0 and rotate == 0.0:
+            if forward > 0:
 
                 if self.tetrapod_mode:
+
                     self.get_logger().info("Tetrapod Forward")
-                    maju()
-                    #tetrapod_maju() #ditutup dulu
+                    tetrapod_maju()
 
                 else:
+
                     self.get_logger().info("Forward")
                     maju()
 
-            # =============================
+            # ==========================
             # Turn Left
-            # =============================
+            # ==========================
 
-            elif rotate > 0 and forward == 0.0 and strafe == 0.0:
+            elif rotate > 0:
 
                 self.get_logger().info("Turn Left")
                 putar_kiri()
 
-            # =============================
+            # ==========================
             # Turn Right
-            # =============================
+            # ==========================
 
-            elif rotate < 0 and forward == 0.0 and strafe == 0.0:
+            elif rotate < 0:
 
                 self.get_logger().info("Turn Right")
                 putar_kanan()
 
-            # =============================
+            # ==========================
             # Strafe Left
-            # =============================
+            # ==========================
 
-            elif strafe < 0 and forward == 0.0 and rotate == 0.0:
+            elif strafe < 0:
 
                 self.get_logger().info("Strafe Left")
                 jalan_kiri_miring()
 
-            # =============================
+            # ==========================
             # Strafe Right
-            # =============================
+            # ==========================
 
-            elif strafe > 0 and forward == 0.0 and rotate == 0.0:
+            elif strafe > 0:
 
                 self.get_logger().info("Strafe Right")
                 jalan_kanan_miring()
 
             else:
 
-                self.get_logger().info("No movement command.")
-
-            forward = 0.0
-            strafe = 0.0
-            rotate = 0.0
-
-            #self.publish_state(False)
+                self.get_logger().info("Stop / No movement")
 
         finally:
 
