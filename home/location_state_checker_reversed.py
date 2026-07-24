@@ -70,11 +70,11 @@ class LocationStateChecker(Node):
         self.create_subscription(Float32MultiArray,'/cv_location_state',self.cv_location_state_callback,1)
 
         self.create_timer(0.05,self.check_state)
-        self.create_timer(
-            0.2,
-            self.timeout_monitor
-        )
-        #self.publish_state(self.state,"A")
+        #self.create_timer(
+        #    0.2,
+        #    self.timeout_monitor
+        #)
+        self.publish_state(self.state,"A")
 
 
     # ---------- Callbacks ----------
@@ -135,7 +135,7 @@ class LocationStateChecker(Node):
         self.pub.publish(msg)
 
         self.get_logger().info(
-            f"Try(teleop)=({1})"
+            f"Try(joystick)=({1})"
             f"State={name} | "
             f"Yaw={self.yaw:.1f} Pitch={self.pitch:.1f} | "
             f"LF={self.left_front:.1f}"
