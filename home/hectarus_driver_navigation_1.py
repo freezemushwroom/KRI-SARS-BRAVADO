@@ -78,7 +78,7 @@ def maju():
         kit1.servo[8].angle = 120 #coxa1
         kit1.servo[2].angle = 120 #coxa3
         kit2.servo[10].angle = 60 #coxa5
-        print("Coxa 1 3 5 Maju")
+        print("Coxa 1 3 5 Maju M")
         sleep(waktu_sleep)
         
 
@@ -117,7 +117,7 @@ def maju():
         kit1.servo[5].angle = 120 #coxa2
         kit2.servo[13].angle = 60 #coxa4
         kit2.servo[7].angle = 60 #coxa6
-        print("Coxa 2 4 6 Maju")
+        print("Coxa 2 4 6 Maju M")
         sleep(waktu_sleep)
 
         #femur 2 4 6 turun dan tibia turun sekalian adjust ngambil kaki
@@ -163,7 +163,7 @@ def putar_kiri():
         kit1.servo[8].angle = 60 #coxa1
         kit1.servo[2].angle = 60 #coxa3
         kit2.servo[10].angle = 60 #coxa5
-        print("Coxa 1 3 Mundur 5 Maju")
+        print("Coxa 1 3 Mundur 5 Maju PKR")
         sleep(waktu_sleep)
         
 
@@ -202,7 +202,7 @@ def putar_kiri():
         kit1.servo[5].angle = 60 #coxa2
         kit2.servo[13].angle = 60 #coxa4
         kit2.servo[7].angle = 60 #coxa6
-        print("Coxa 2 Mundur Coxa 4 6 Maju")
+        print("Coxa 2 Mundur Coxa 4 6 Maju PKR")
         sleep(waktu_sleep)
 
         #femur 2 4 6 turun dan tibia turun sekalian adjust ngambil kaki
