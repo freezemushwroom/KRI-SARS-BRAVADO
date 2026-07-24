@@ -153,8 +153,8 @@ class NavigationController(Node):
             self.get_logger().info("Robot is moving, not getting any info")
     
     def movement_state_callback(self, msg):
-        self.movement_state = msg.data # kita atur not karna /motion_complete itu kebalikan datanya untuk /movement_state saat memberikan informasi yang sama
-        #self.movement_state = False # uncomment untuk mode debug
+        #self.movement_state = msg.data # kita atur not karna /motion_complete itu kebalikan datanya untuk /movement_state saat memberikan informasi yang sama
+        self.movement_state = False # uncomment untuk mode debug
     
     def left_dist_callback(self, msg):
         if self.movement_state == False: 
