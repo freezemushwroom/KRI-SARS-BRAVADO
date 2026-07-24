@@ -265,7 +265,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==2:
 
-            if -1<=self.pitch<=1 and front <= 7:
+            if -1<=self.pitch<=1 and front <= 10:
                 self.change_state(3,"B") # putar kiri
 
         #==========================
@@ -291,7 +291,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==5:
 
-            if self.yaw90() and back>75 and front<12:
+            if self.yaw90() and back>55 and front<10:
                 self.change_state(6,"D") # putar kiri
 
         #==========================

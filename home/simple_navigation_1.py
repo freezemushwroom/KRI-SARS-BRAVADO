@@ -4,7 +4,7 @@ import rclpy
 from rclpy.node import Node
 
 from std_msgs.msg import String
-from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Float32MultiArray, Int32MultiArray
 from std_msgs.msg import Bool
 
 import time
@@ -47,6 +47,16 @@ class NavigationController(Node):
 
         self.deviation_front_dist = 0.0
         self.deviation_back_dist = 0.0
+        self.left_front = 0.0
+        self.left = 0.0
+        self.left_rear = 0.0
+
+        self.back = 0.0
+
+        self.right_front = 0.0
+        self.right = 0.0
+
+        self.front = 0.0
 
         self.pub = self.create_publisher(
             Float32MultiArray,
@@ -94,6 +104,12 @@ class NavigationController(Node):
             "/back_dist",
             self.back_dist_callback,
             1
+        )
+        self.create_subscription(
+            Int32MultiArray,
+            "/ultrasonic",
+            self.ultrasonic_cb,
+            10
         )
 
         self.pub_tetrapod_gait = self.create_publisher(
@@ -161,6 +177,19 @@ class NavigationController(Node):
         if not self.movement_state:
             if msg.data:
                 self.deviation_back_dist = msg.data[0]
+    def ultrasonic_cb(self, msg):
+    
+        if len(msg.data) < 7:
+            return
+
+        self.left_front = float(msg.data[0])
+        self.left       = float(msg.data[1])
+        self.left_rear  = float(msg.data[2])
+        self.back       = float(msg.data[3])
+        self.right_front= float(msg.data[4])
+        self.right      = float(msg.data[5])
+        self.front      = float(msg.data[6])
+
 
     def strafe_debug_callback(self, msg):
         self.strafe_correction_debug = msg.data[0]
@@ -222,47 +251,51 @@ class NavigationController(Node):
                 #self.walk_forward(1)
                 # dibawah adalah koreksi untuk pergerakan yaw yang bisa digunaakn untuk kondisi saat "maju" apapun
 
+                #dibawah ini fix untuk robot
+                self.deviation_left_dist = self.left
+                self.deviation_right_dist = self.right
+
                 # untuk sementara ini smeua pergerakan koreksi ditutup dulu sampai sudah optimal
 
                 #quadrant 1
                 step = "forward"
                 if self.quadrant_compensation_val == 0.0 and self.deviation_yaw <= 180.0 and self.deviation_yaw > 9.0:
                     self.yaw_dev_value = self.deviation_yaw
-                    #self.correcting_state = True
+                    self.correcting_state = True
                     self.get_logger().info("Leaning Left(q1)")
                 elif self.quadrant_compensation_val == 0.0 and self.deviation_yaw > 180 and self.deviation_yaw < 360.0 - 9.0:
                     self.yaw_dev_value = self.deviation_yaw
-                    #self.correcting_state = True
+                    self.correcting_state = True
                     self.get_logger().info("Leaning Right(q1)")
                 
                 # quadrant 2
                 if self.quadrant_compensation_val == 90.0 and self.deviation_yaw <= 270 and self.deviation_yaw > 90.0 + 9.0:
                     self.yaw_dev_value = self.deviation_yaw
-                    #self.correcting_state = True
+                    self.correcting_state = True
                     self.get_logger().info("Leaning Left(q2)")
                 elif self.quadrant_compensation_val == 90.0 and (self.deviation_yaw > 270.0 or self.deviation_yaw < 90.0 - 9.0):
                     self.yaw_dev_value = self.deviation_yaw
-                    #self.correcting_state = True
+                    self.correcting_state = True
                     self.get_logger().info("Leaning Right(q2)")
 
                 # quadrant 3
                 if self.quadrant_compensation_val == 180.0 and self.deviation_yaw <= 360.0 and self.deviation_yaw > 180.0 + 9.0:
                     self.yaw_dev_value = self.deviation_yaw
-                    #self.correcting_state = True
+                    self.correcting_state = True
                     self.get_logger().info("Leaning Left(q3)")
                 elif self.quadrant_compensation_val == 180.0 and self.deviation_yaw > 0.0 and self.deviation_yaw < 180.0 - 9.0:
                     self.yaw_dev_value = self.deviation_yaw
-                    #self.correcting_state = True
+                    self.correcting_state = True
                     self.get_logger().info("Leaning Right(q3)")
                 
                 elif self.deviation_right_dist < 14:
                     self.rightdist_dev_value = self.deviation_right_dist
-                    #self.correcting_state_strafe = True
+                    self.correcting_state_strafe = True
                     self.get_logger().info("Close to right wall")
                 
                 elif self.deviation_left_dist < 14:
                     self.leftdist_dev_value = self.deviation_left_dist
-                    #self.correcting_state_strafe = True
+                    self.correcting_state_strafe = True
                     self.get_logger().info("Close to left wall")
                 
                 #fix bidang miring
