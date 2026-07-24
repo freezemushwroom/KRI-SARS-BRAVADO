@@ -744,25 +744,6 @@ class MovementExecutor(Node):
     def cmd_callback(self, msg):
 
         if self.busy:
-            self.get_logger().warn("Robot still moving, ignoring command.")
-            return
-
-        if len(msg.data) < 3:
-            return
-
-        forward = msg.data[0]
-        strafe = msg.data[1]
-        rotate = msg.data[2]
-
-        threading.Thread(
-            target=self.execute_command,
-            args=(forward, strafe, rotate),
-            daemon=True
-        ).start()
-
-    def cmd_callback(self, msg):
-
-        if self.busy:
             self.get_logger().warn("Robot is busy.")
             return
 
