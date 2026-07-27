@@ -519,6 +519,7 @@ class NavigationController(Node):
             self.stop()
 
     def publish_movement(self, data, message):
+        global movement_counter
         movement_counter = movement_counter + 1
         self.get_logger().info(f"Perintah ke({movement_counter}) ")
         self.msg = Bool()
