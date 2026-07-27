@@ -10,6 +10,8 @@ from std_msgs.msg import Bool
 import time
 SAFE_DISTANCE = 0.10
 
+movement_counter = 0
+
 
 class NavigationController(Node):
 
@@ -516,14 +518,26 @@ class NavigationController(Node):
         elif step == "stop":
             self.stop()
 
+    def publish_movement(self, data, message):
+        movement_counter = movement_counter + 1
+        self.get_logger().info(f"Perintah ke({movement_counter}) ")
+        self.msg = Bool()
+        self.msg.data = False
+        self.pub_tetrapod_gait.publish(self.msg)
+        self.msg = Float32MultiArray()
+        self.msg.data = data
+        self.pub.publish(self.msg)
+        self.get_logger().info(message)
+
     def stop(self):
         self.msg = Bool()
         self.msg.data = False
         self.pub_tetrapod_gait.publish(self.msg)
         self.msg = Float32MultiArray()
         self.msg.data = [0.0, 0.0, 0.0]
-        self.pub.publish(self.msg)
-        self.get_logger().info("STOP aja")
+        #self.pub.publish(self.msg)
+        #self.get_logger().info("STOP aja")
+        self.publish_movement(self.msg.data, "STOP aja")
 
     def walk_forward(self, steps):
         self.msg = Bool()
@@ -532,8 +546,9 @@ class NavigationController(Node):
         self.msg = Float32MultiArray()
         for _ in range(steps):
             self.msg.data = [6.0, 0.0, 0.0]
-            self.pub.publish(self.msg)
-            self.get_logger().info("FORWARD")
+            #self.pub.publish(self.msg)
+            #self.get_logger().info("FORWARD")
+            self.publish_movement(self.msg.data, "FORWARD")
             time.sleep(2.0)
 
         #self.stop()
@@ -546,8 +561,9 @@ class NavigationController(Node):
         self.msg = Float32MultiArray()
         for _ in range(steps):
             self.msg.data = [0.0, 0.0, 30.0]
-            self.pub.publish(self.msg)
-            self.get_logger().info("TURN LEFT")
+            #self.pub.publish(self.msg)
+            #self.get_logger().info("TURN LEFT")
+            self.publish_movement(self.msg.data, "TURN LEFT")
             time.sleep(3.0)
 
         #self.stop()
@@ -559,8 +575,9 @@ class NavigationController(Node):
         self.msg = Float32MultiArray()
         for _ in range(steps):
             self.msg.data = [0.0, 0.0, -30.0]
-            self.pub.publish(self.msg)
-            self.get_logger().info("TURN RIGHT")
+            #self.pub.publish(self.msg)
+            #self.get_logger().info("TURN RIGHT")
+            self.publish_movement(self.msg.data, "TURN RIGHT")
             time.sleep(3.0)
     
     def walk_backward(self,steps):
@@ -577,9 +594,10 @@ class NavigationController(Node):
 
             self.msg.data = [-6.0,0.0,0.0]
 
-            self.pub.publish(self.msg)
+            #self.pub.publish(self.msg)
 
-            self.get_logger().info("BACKWARD")
+            #self.get_logger().info("BACKWARD")
+            self.publish_movement(self.msg.data, "BACKWARD")
 
             time.sleep(2.0)
         
@@ -590,8 +608,9 @@ class NavigationController(Node):
         self.msg = Float32MultiArray()
         for _ in range(steps):
             self.msg.data = [0.0, -5.0, 0.0]
-            self.pub.publish(self.msg)
-            self.get_logger().info("STRAFE LEFT")
+            #self.pub.publish(self.msg)
+            #self.get_logger().info("STRAFE LEFT")
+            self.publish_movement(self.msg.data, "STRAFE LEFT")
             time.sleep(3.0)
     
     def strafe_right(self, steps):
@@ -601,8 +620,9 @@ class NavigationController(Node):
         self.msg = Float32MultiArray()
         for _ in range(steps):
             self.msg.data = [0.0, 5.0, 0.0]
-            self.pub.publish(self.msg)
-            self.get_logger().info("STRAFE RIGHT")
+            #self.pub.publish(self.msg)
+            #self.get_logger().info("STRAFE RIGHT")
+            self.publish_movement(self.msg.data, "STRAFE RIGHT")
             time.sleep(3.0)
 
         self.stop()
@@ -614,8 +634,9 @@ class NavigationController(Node):
         self.msg = Float32MultiArray()
         for _ in range(steps):
             self.msg.data = [6.0, 0.0, 0.0]
-            self.pub.publish(self.msg)
-            self.get_logger().info("TERAPOD FORWARD")
+            #self.pub.publish(self.msg)
+            #self.get_logger().info("TERAPOD FORWARD")
+            self.publish_movement(self.msg.data, "TETRAPOD FORWARD")
             time.sleep(3.0)
 
 
