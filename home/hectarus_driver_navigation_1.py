@@ -75,6 +75,13 @@ current_action = None
 def maju():
     #loop_print("maju")
     while not stop_event.is_set():
+        #femur 1 3 5 ngangkat
+        kit1.servo[7].angle = 180 #femur1
+        kit1.servo[1].angle = 180 #femur3
+        kit2.servo[11].angle = 0 #femur5
+        print("Femur 1 3 5 Ngangkat")
+        sleep(waktu_sleep)
+
         #coxa 1 3 5 maju
         kit1.servo[8].angle = 120 #coxa1
         kit1.servo[2].angle = 120 #coxa3
@@ -148,12 +155,7 @@ def maju():
         kit2.servo[9].angle = 45 #tibia6
         print("Coxa Femur Tibia 2 4 6 Balik")
         #sleep(0.05)
-        #femur 1 3 5 ngangkat
-        kit1.servo[7].angle = 180 #femur1
-        kit1.servo[1].angle = 180 #femur3
-        kit2.servo[11].angle = 0 #femur5
-        print("Femur 1 3 5 Ngangkat")
-        sleep(waktu_sleep)
+        
         time.sleep(0.25)
         print(f"stopped maju")
         break
@@ -161,6 +163,13 @@ def maju():
 def putar_kiri(): 
     #loop_print("muter kiri")
     while not stop_event.is_set():
+        #femur 1 3 5 ngangkat
+        kit1.servo[7].angle = 180 #femur1
+        kit1.servo[1].angle = 180 #femur3
+        kit2.servo[11].angle = 0 #femur5
+        print("Femur 1 3 5 Ngangkat")
+        sleep(waktu_sleep)
+
         #coxa 1 3 mundur 5 maju
         kit1.servo[8].angle = 60 #coxa1
         kit1.servo[2].angle = 60 #coxa3
@@ -234,12 +243,7 @@ def putar_kiri():
         kit2.servo[9].angle = 45 #tibia6
         print("Coxa Femur Tibia 2 4 6 Balik")
         #sleep(0.05)
-        #femur 1 3 5 ngangkat
-        kit1.servo[7].angle = 180 #femur1
-        kit1.servo[1].angle = 180 #femur3
-        kit2.servo[11].angle = 0 #femur5
-        print("Femur 1 3 5 Ngangkat")
-        sleep(waktu_sleep)
+        
         time.sleep(0.25)
         print(f"stopped putar kiri")
         break
@@ -247,6 +251,13 @@ def putar_kiri():
 def putar_kanan(): 
     #loop_print("muter kanan")
     while not stop_event.is_set():
+        #femur 1 3 5 ngangkat
+        kit1.servo[7].angle = 180 #femur1
+        kit1.servo[1].angle = 180 #femur3
+        kit2.servo[11].angle = 0 #femur5
+        print("Femur 1 3 5 Ngangkat")
+        sleep(waktu_sleep)
+
         #coxa 1 3 5 maju
         kit1.servo[8].angle = 120 #coxa1
         kit1.servo[2].angle = 120 #coxa3
@@ -320,12 +331,7 @@ def putar_kanan():
         kit2.servo[9].angle = 45 #tibia6
         print("Coxa Femur Tibia 2 4 6 Balik")
         #sleep(0.05)
-        #femur 1 3 5 ngangkat
-        kit1.servo[7].angle = 180 #femur1
-        kit1.servo[1].angle = 180 #femur3
-        kit2.servo[11].angle = 0 #femur5
-        print("Femur 1 3 5 Ngangkat")
-        sleep(waktu_sleep)
+        
         time.sleep(0.25)
         print(f"stopped putar kanan")
         break
@@ -516,7 +522,7 @@ def jalan_kiri_miring():
         print(f"stopped strafe kiri")
         break
 
-
+# hati hati ini masih belum strafe kanan
 def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
     #loop_print("miring kanan")
     while not stop_event.is_set():
