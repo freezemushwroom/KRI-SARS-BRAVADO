@@ -78,7 +78,7 @@ class NavigationController(Node):
             Float32MultiArray,
             "/rpy",
             self.rpy_callback,
-            2
+            1
         )
 
         self.sub_left_dist = self.create_subscription(
@@ -133,7 +133,7 @@ class NavigationController(Node):
             "/movement_state",
             #"/motion_complete", # awalnya /movement_state yaitu dari gazebo joint pblisher, tapi kita ganti biar bisa pasti sama acceleration value
             self.movement_state_callback,
-            10
+            1
         )
         self.sub_timeout = self.create_subscription(
             Bool,
@@ -520,6 +520,7 @@ class NavigationController(Node):
 
     def publish_movement(self, data, message):
         global movement_counter
+        self.movement_state = True
         movement_counter = movement_counter + 1
         self.get_logger().info(f"Perintah ke({movement_counter}) ")
         self.msg = Bool()
