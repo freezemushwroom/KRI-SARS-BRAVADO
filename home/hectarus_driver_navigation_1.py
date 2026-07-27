@@ -155,6 +155,7 @@ def maju():
         print("Femur 1 3 5 Ngangkat")
         sleep(waktu_sleep)
         time.sleep(0.25)
+        langsungBerdiri()
         print(f"stopped maju")
         break
 
@@ -241,6 +242,7 @@ def putar_kiri():
         print("Femur 1 3 5 Ngangkat")
         sleep(waktu_sleep)
         time.sleep(0.25)
+        langsungBerdiri()
         print(f"stopped putar kiri")
         break
 
@@ -327,6 +329,7 @@ def putar_kanan():
         print("Femur 1 3 5 Ngangkat")
         sleep(waktu_sleep)
         time.sleep(0.25)
+        langsungBerdiri()
         print(f"stopped putar kanan")
         break
 
@@ -513,6 +516,7 @@ def jalan_kiri_miring():
         kit2.servo[8].angle = 180 - data[11+9] #femur6
         kit2.servo[9].angle = data[12+9] #tibia6
         time.sleep(0.25)
+        langsungBerdiri()
         print(f"stopped strafe kiri")
         break
 
@@ -699,11 +703,13 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         kit2.servo[8].angle = 180 - data[11+9] #femur6
         kit2.servo[9].angle = data[12+9] #tibia6
         time.sleep(0.25)
+        langsungBerdiri()
         print(f"stopped strafe kanan")
         break
 
 
 def tetrapod_maju():
+    langsungBerdiri()
     print("Tetrapod Forward")
 
 def langsungBerdiri():
