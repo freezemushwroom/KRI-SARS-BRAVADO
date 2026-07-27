@@ -902,6 +902,7 @@ class MovementExecutor(Node):
             forward = 0.0
             strafe = 0.0
             rotate = 0.0
+            langsungBerdiri()
 
         finally:
 
