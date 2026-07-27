@@ -821,6 +821,7 @@ class MovementExecutor(Node):
         self.pub_state.publish(msg)
 
     def cmd_callback(self, msg):
+        global movement_counter
 
         if self.busy:
             self.get_logger().warn("Robot is busy.")
