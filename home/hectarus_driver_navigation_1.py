@@ -18,6 +18,7 @@ from adafruit_servokit import ServoKit
 import math
 
 waktu_sleep = 0.2
+movement_counter = 0
 
 
 kit1 = ServoKit(channels = 16, address = 0x41) #, reference_clock_speed = 24930632)
@@ -827,6 +828,9 @@ class MovementExecutor(Node):
 
         if len(msg.data) < 3:
             return
+
+        movement_counter = movement_counter + 1
+        self.get_logger().info(f"New data in({movement_counter}) ")
 
         self.busy = True
         self.publish_state(True)
