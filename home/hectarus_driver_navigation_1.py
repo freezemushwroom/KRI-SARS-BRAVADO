@@ -665,7 +665,7 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         kit1.servo[1].angle = data[13+9] + data[7]
 
         # Leg 5
-        kit2.servo[12].angle = 0
+        kit2.servo[12].angle = 90
         kit2.servo[11].angle = 180 - data[9+9] - data[1+9]
         wait(delay)
 
