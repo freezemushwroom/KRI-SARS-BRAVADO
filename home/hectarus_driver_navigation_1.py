@@ -683,7 +683,7 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         kit2.servo[9].angle = data[12+9] #tibia6
 
         wait(0.02)
-        
+
         #femur angkat
         # Leg 1
         kit1.servo[7].angle = max(0, min((data[11+9] + 30), 180)) #femur1
@@ -716,7 +716,7 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         kit1.servo[0].angle = 180 - data[14+9] #tibia3
 
         kit2.servo[11].angle = 180 - data[9+9] #femur5
-        kit2.servo[12].angle = 0 #90 - data[14+9] - data[8] #tibia5
+        kit2.servo[12].angle = data[10+9] #90 - data[14+9] - data[8] #tibia5
 
         
         time.sleep(0.25)
