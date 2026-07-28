@@ -308,7 +308,7 @@ class LocationStateChecker(Node):
         #==========================
         elif self.state==7:
 
-            if back>55 and front<15 and right<15:
+            if back>38 and front<15 and right<15:
                 self.change_state(8,"E") # stop
 
         #==========================

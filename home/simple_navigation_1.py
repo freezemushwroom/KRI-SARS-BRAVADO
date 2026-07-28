@@ -4,7 +4,7 @@ import rclpy
 from rclpy.node import Node
 
 from std_msgs.msg import String
-from std_msgs.msg import Float32MultiArray, Int32MultiArray
+from std_msgs.msg import Float32MultiArray, Int32MultiArray, String
 from std_msgs.msg import Bool
 
 import time
@@ -120,6 +120,12 @@ class NavigationController(Node):
             1
         )
 
+        self.pub_correction_move = self.create_publisher(
+            String,
+            "/correction_detect",
+            1
+        )
+
         # ini subsciber buat debugging aja
         self.sub_debug_strafe = self.create_subscription(
             Bool,
@@ -147,6 +153,11 @@ class NavigationController(Node):
 
         self.get_logger().info("Navigation Controller Started")
         self.create_timer(2.0, self.location_callback) # location_callback jadi function jalan
+
+    def publish_correction(self, type, value):
+        self.msg = String()
+        self.msg.data = type + str(value)
+        self.pub_correction_move.publish(self.msg)
     
     def rpy_callback(self, msg):
         if self.movement_state == False:
@@ -262,43 +273,51 @@ class NavigationController(Node):
 
                 #quadrant 1
                 step = "forward"
-                if self.quadrant_compensation_val == 0.0 and self.deviation_yaw <= 180.0 and self.deviation_yaw > 9.0:
+                if self.quadrant_compensation_val == 0.0 and self.deviation_yaw <= 180.0 and self.deviation_yaw > 12.0:
                     self.yaw_dev_value = self.deviation_yaw
                     self.correcting_state = True
+                    self.publish_correction("Leaning Left(q1) ", self.deviation_yaw)
                     self.get_logger().info("Leaning Left(q1)")
-                elif self.quadrant_compensation_val == 0.0 and self.deviation_yaw > 180 and self.deviation_yaw < 360.0 - 9.0:
+                elif self.quadrant_compensation_val == 0.0 and self.deviation_yaw > 180 and self.deviation_yaw < 360.0 - 12.0:
                     self.yaw_dev_value = self.deviation_yaw
                     self.correcting_state = True
+                    self.publish_correction("Leaning Right(q1) ", self.deviation_yaw)
                     self.get_logger().info("Leaning Right(q1)")
                 
                 # quadrant 2
-                if self.quadrant_compensation_val == 90.0 and self.deviation_yaw <= 270 and self.deviation_yaw > 90.0 + 9.0:
+                if self.quadrant_compensation_val == 90.0 and self.deviation_yaw <= 270 and self.deviation_yaw > 90.0 + 12.0:
                     self.yaw_dev_value = self.deviation_yaw
                     self.correcting_state = True
+                    self.publish_correction("Leaning Left(q2) ", self.deviation_yaw)
                     self.get_logger().info("Leaning Left(q2)")
-                elif self.quadrant_compensation_val == 90.0 and (self.deviation_yaw > 270.0 or self.deviation_yaw < 90.0 - 9.0):
+                elif self.quadrant_compensation_val == 90.0 and (self.deviation_yaw > 270.0 or self.deviation_yaw < 90.0 - 12.0):
                     self.yaw_dev_value = self.deviation_yaw
                     self.correcting_state = True
+                    self.publish_correction("Leaning Right(q2) ", self.deviation_yaw)
                     self.get_logger().info("Leaning Right(q2)")
 
                 # quadrant 3
-                if self.quadrant_compensation_val == 180.0 and self.deviation_yaw <= 360.0 and self.deviation_yaw > 180.0 + 9.0:
+                if self.quadrant_compensation_val == 180.0 and self.deviation_yaw <= 360.0 and self.deviation_yaw > 180.0 + 12.0:
                     self.yaw_dev_value = self.deviation_yaw
                     self.correcting_state = True
+                    self.publish_correction("Leaning Left(q3) ", self.deviation_yaw)
                     self.get_logger().info("Leaning Left(q3)")
-                elif self.quadrant_compensation_val == 180.0 and self.deviation_yaw > 0.0 and self.deviation_yaw < 180.0 - 9.0:
+                elif self.quadrant_compensation_val == 180.0 and self.deviation_yaw > 0.0 and self.deviation_yaw < 180.0 - 12.0:
                     self.yaw_dev_value = self.deviation_yaw
                     self.correcting_state = True
+                    self.publish_correction("Leaning Right(q3) ", self.deviation_yaw)
                     self.get_logger().info("Leaning Right(q3)")
                 
-                elif self.deviation_right_dist < 8 and self.deviation_right_dist > 1:
+                elif self.deviation_right_dist <= 7 and self.deviation_right_dist > 1:
                     self.rightdist_dev_value = self.deviation_right_dist
                     self.correcting_state_strafe = True
+                    self.publish_correction("Close to right wall ", self.deviation_right_dist)
                     self.get_logger().info("Close to right wall")
                 
-                elif self.deviation_left_dist < 8 and self.deviation_left_dist > 1:
+                elif self.deviation_left_dist <= 7 and self.deviation_left_dist > 1:
                     self.leftdist_dev_value = self.deviation_left_dist
                     self.correcting_state_strafe = True
+                    self.publish_correction("Close to left wall ", self.deviation_left_dist)
                     self.get_logger().info("Close to left wall")
                 
                 #fix bidang miring
@@ -328,7 +347,7 @@ class NavigationController(Node):
             #q1
             if self.correcting_state == True:
                 if self.quadrant_compensation_val == 0.0 and self.yaw_dev_value > 0.0  and self.yaw_dev_value <=180.0:
-                    if self.deviation_yaw >8.0:
+                    if self.deviation_yaw >10.0:
                         step = "right" # counter move
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
@@ -340,7 +359,7 @@ class NavigationController(Node):
                     #    self.correcting_state = False # jadi kita cuman 2 kali aja
                 elif self.quadrant_compensation_val == 0.0 and self.yaw_dev_value < 360.0 and self.yaw_dev_value > 180:
                     # also correct the yaw orientation
-                    if self.deviation_yaw <360.0 -8.0:
+                    if self.deviation_yaw <360.0 -10.0:
                         step = "left"
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
@@ -351,7 +370,7 @@ class NavigationController(Node):
             #q2
             if self.correcting_state == True:
                 if self.quadrant_compensation_val == 90.0 and self.yaw_dev_value > 90.0  and self.yaw_dev_value <=270.0:
-                    if self.deviation_yaw >98.0:
+                    if self.deviation_yaw >100.0:
                         step = "right" # counter move
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
@@ -363,7 +382,7 @@ class NavigationController(Node):
                     #    self.correcting_state = False # jadi kita cuman 2 kali aja
                 elif self.quadrant_compensation_val == 90.0 and (self.yaw_dev_value < 90.0 or self.yaw_dev_value > 270.0):
                     # also correct the yaw orientation
-                    if self.deviation_yaw <90.0 -8.0:
+                    if self.deviation_yaw <90.0 -10.0:
                         step = "left"
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
@@ -375,7 +394,7 @@ class NavigationController(Node):
             #q3
             if self.correcting_state == True:
                 if self.quadrant_compensation_val == 180.0 and self.yaw_dev_value > 180.0  and self.yaw_dev_value <=360.0:
-                    if self.deviation_yaw >188.0:
+                    if self.deviation_yaw >190.0:
                         step = "right" # counter move
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
@@ -387,7 +406,7 @@ class NavigationController(Node):
                     #    self.correcting_state = False # jadi kita cuman 2 kali aja
                 elif self.quadrant_compensation_val == 180.0 and self.yaw_dev_value < 180.0 and self.yaw_dev_value > 0.0:
                     # also correct the yaw orientation
-                    if self.deviation_yaw <180.0 -8.0:
+                    if self.deviation_yaw <180.0 -10.0:
                         step = "left"
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
@@ -397,8 +416,8 @@ class NavigationController(Node):
                         self.yaw_dev_value = self.deviation_yaw
             
             if self.correcting_state_strafe == True:
-                if self.rightdist_dev_value < 12:
-                    if self.deviation_right_dist < 12:
+                if self.rightdist_dev_value <= 11:
+                    if self.deviation_right_dist <= 11:
                         step = "strafe_left"
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
@@ -407,8 +426,8 @@ class NavigationController(Node):
                         self.get_logger().info("STOP - done strafe_left")
                         self.rightdist_dev_value = self.deviation_right_dist
                         self.get_logger().info(f"{self.rightdist_dev_value}")
-                elif self.leftdist_dev_value < 12:
-                    if self.deviation_left_dist < 12:
+                elif self.leftdist_dev_value <= 11:
+                    if self.deviation_left_dist <= 11:
                         step = "strafe_right"
                         self.correcting_counter = self.correcting_counter + 1.0
                     else:
