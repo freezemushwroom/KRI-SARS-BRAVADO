@@ -783,7 +783,7 @@ def langsungBerdiri():
     kit2.servo[12].angle = (180-suduttt) - 45 #tibia5 45
     kit1.servo[0].angle = (sudutt) + 45 #tibia3 135
     kit2.servo[15].angle = (180-suduttt) - 45 #tibia4 45
-    sleep(3)
+    sleep(1)
 
 
 class MovementExecutor(Node):
