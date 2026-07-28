@@ -539,7 +539,7 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         forward = maju
         gait = 2
         #0 tripod, 1 wave, 2 tetrapod
-        geser = -4 # kalo ini positif jadi ke kanan katanya
+        geser = 4 # kalo ini positif jadi ke kanan katanya
         roll = -6
         mundur = 0
 
@@ -658,14 +658,17 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
 
         #femur 1 3 5 turun dan tibia turun sekalian adjust ngambil kaki
         # Leg 1
-        kit1.servo[6].angle = max(0, min((180 - data[12+9] - data[5]), 180)) #tibia1
-        kit1.servo[0].angle = max(0, min((180 - data[14+9] - data[8]), 180)) #tibia3
-        #kit2.servo[12].angle = 0 #max(0, min((data[10+9] + data[2+9] - 10), 180)) #tibia5
-        kit2.servo[12].angle = max(0, min((data[10+9] + data[2+9] - 10), 180)) #tibia5
-        wait(0.3)
-        kit1.servo[7].angle = max(0, min((data[11+9] + data[4]), 180)) #femur1
-        kit1.servo[1].angle = max(0, min((data[13+9] + data[7]), 180)) #femur3
-        kit2.servo[11].angle = max(0, min((180 - data[9+9]- data[1+9]), 180)) #femur5
+        # Leg 1
+        kit1.servo[6].angle = 180 - data[12+9] + data[5]
+        kit1.servo[7].angle = data[11+9] - data[4]
+
+        # Leg 3
+        kit1.servo[0].angle = 180 - data[14+9] + data[8]
+        kit1.servo[1].angle = data[13+9] - data[7]
+
+        # Leg 5
+        kit2.servo[12].angle = 0
+        kit2.servo[11].angle = 180 - data[9+9] + data[1+9]
         wait(delay)
 
         # femur tibia 1 3 5 balik ke posisi awal
