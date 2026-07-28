@@ -567,7 +567,7 @@ class NavigationController(Node):
             #self.pub.publish(self.msg)
             #self.get_logger().info("TURN LEFT")
             self.publish_movement(self.msg.data, "TURN LEFT")
-            time.sleep(3.0)
+            time.sleep(0.1)
 
         #self.stop()
 
@@ -581,7 +581,7 @@ class NavigationController(Node):
             #self.pub.publish(self.msg)
             #self.get_logger().info("TURN RIGHT")
             self.publish_movement(self.msg.data, "TURN RIGHT")
-            time.sleep(3.0)
+            time.sleep(0.1)
     
     def walk_backward(self,steps):
 
@@ -602,7 +602,7 @@ class NavigationController(Node):
             #self.get_logger().info("BACKWARD")
             self.publish_movement(self.msg.data, "BACKWARD")
 
-            time.sleep(2.0)
+            time.sleep(0.1)
         
     def strafe_left(self, steps):
         self.msg = Bool()
@@ -614,7 +614,7 @@ class NavigationController(Node):
             #self.pub.publish(self.msg)
             #self.get_logger().info("STRAFE LEFT")
             self.publish_movement(self.msg.data, "STRAFE LEFT")
-            time.sleep(3.0)
+            time.sleep(0.1)
     
     def strafe_right(self, steps):
         self.msg = Bool()
@@ -626,7 +626,7 @@ class NavigationController(Node):
             #self.pub.publish(self.msg)
             #self.get_logger().info("STRAFE RIGHT")
             self.publish_movement(self.msg.data, "STRAFE RIGHT")
-            time.sleep(3.0)
+            time.sleep(0.1)
 
         self.stop()
     
@@ -640,7 +640,7 @@ class NavigationController(Node):
             #self.pub.publish(self.msg)
             #self.get_logger().info("TERAPOD FORWARD")
             self.publish_movement(self.msg.data, "TETRAPOD FORWARD")
-            time.sleep(3.0)
+            time.sleep(0.1)
 
 
 def main(args=None):
