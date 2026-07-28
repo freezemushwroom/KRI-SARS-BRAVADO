@@ -657,11 +657,11 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
 
         #femur 1 3 5 turun dan tibia turun sekalian adjust ngambil kaki
         # Leg 1
-        kit1.servo[6].angle = 0 - data[12+9] #- data[5]
+        kit1.servo[6].angle = -30 - data[5]
         kit1.servo[7].angle = data[11+9] + data[4]
 
         # Leg 3
-        kit1.servo[0].angle = 0 - data[14+9] #- data[8]
+        kit1.servo[0].angle = -30  - data[8]
         kit1.servo[1].angle = data[13+9] + data[7]
 
         # Leg 5
