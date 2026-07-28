@@ -660,13 +660,13 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         wait(delay)
 
         #femur 1 3 5 turun dan tibia turun sekalian adjust ngambil kaki
-        kit1.servo[6].angle = max(0, min((180 - data[12+9] - data[5]), 180)) #tibia1
-        kit1.servo[0].angle = max(0, min((180 - data[14+9] - data[8]), 180)) #tibia3
-        kit2.servo[12].angle = 0 #max(0, min((data[10+9] + data[2+9] - 10), 180)) #tibia5
-        wait(0.3)
-        kit1.servo[7].angle = max(0, min((data[11+9] + data[4]), 180)) #femur1
-        kit1.servo[1].angle = max(0, min((data[13+9] + data[7]), 180)) #femur3
-        kit2.servo[11].angle = max(0, min((180 - data[9+9]- data[1+9]), 180)) #femur5
+        kit1.servo[6].angle = 180 - data[12+9] + data[5]
+        kit1.servo[0].angle = 180 - data[14+9] + data[8]
+        kit2.servo[12].angle = 0
+
+        kit1.servo[7].angle = data[11+9] - data[4]
+        kit1.servo[1].angle = data[13+9] - data[7]
+        kit2.servo[11].angle = 180 - data[9+9] + data[1+9]
 
         wait(delay)
 
@@ -695,13 +695,16 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         kit2.servo[15].angle = max(0, min((data[14+9] + data[8+9] - 10), 180)) #tibia4
         kit2.servo[9].angle = max(0, min((data[12+9] + data[5+9] - 10), 180)) #tibia6
         # Leg 2
-        kit1.servo[3].angle = 180 - data[10+9] + data[2]
+        #kit1.servo[3].angle = 180 - data[10+9] + data[2]
+        kit1.servo[3].angle = 180 - data[10+9] - data[2]
+        
         
         wait(0.3)
         #kit1.servo[4].angle = max(0, min((data[9+9] + data[1]), 180)) #femur2
         kit2.servo[14].angle = max(0, min((180 - data[13+9] - data[7+9]), 180)) #femur4
         kit2.servo[8].angle = max(0, min((180 - data[11+9] - data[4+9]), 180)) #femur6
-        kit1.servo[4].angle = data[9+9] - data[1]
+        #kit1.servo[4].angle = data[9+9] - data[1]
+        kit1.servo[4].angle = data[9+9] + data[1]
         wait(delay)
 
         #femur tibia 2 4 6 balik ke poisi awal
