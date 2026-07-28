@@ -539,7 +539,7 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
         forward = maju
         gait = 2
         #0 tripod, 1 wave, 2 tetrapod
-        geser = 4 # kalo ini positif jadi ke kanan katanya
+        geser = -4 # kalo ini positif jadi ke kanan katanya
         roll = -6
         mundur = 0
 
