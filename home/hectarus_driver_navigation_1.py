@@ -645,42 +645,8 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
 
         data = [int(base_coxa_tengah_kiri), int(coxa_femur_tengah_kiri), int(femur_tibia_tengah_kiri), int(base_coxa_depan_kiri), int(coxa_femur_depan_kiri),int(femur_tibia_depan_kiri), int(base_coxa_belakang_kiri), int(coxa_femur_belakang_kiri), int(femur_tibia_belakang_kiri), int(base_coxa_tengah_kanan), int(coxa_femur_tengah_kanan), int(femur_tibia_tengah_kanan), int(base_coxa_depan_kanan), int(coxa_femur_depan_kanan), int(femur_tibia_depan_kanan), int(base_coxa_belakang_kanan), int(coxa_femur_belakang_kanan), int(femur_tibia_belakang_kanan), int(coxa_femur_tengah_berdiri+35), int(femur_tibia_tengah_berdiri-45), int(coxa_femur_depan_berdiri+35), int(femur_tibia_depan_berdiri-45), int(coxa_femur_belakang_berdiri+35), int(femur_tibia_belakang_berdiri-45), 0]
 
-        #femur angkat
-        # Leg 1
-        kit1.servo[7].angle = max(0, min((data[11+9] + 30), 180)) #femur1
-        kit1.servo[6].angle = max(0, min((180 - data[12+9] + 30), 180)) #tibia1
-        kit1.servo[1].angle = max(0, min((data[13+9] + 30), 180)) #femur3
-        kit1.servo[0].angle = max(0, min((180 - data[14+9] + 30), 180)) #tibia3
-        kit2.servo[11].angle = max(0, min((180 - data[9+9] - 30), 180)) #femur5
-#        kit2.servo[12].angle = max(0, min((data[10+9] - 30), 180)) #tibia5
-        wait(delay)
-
-        #femur 1 3 5 turun dan tibia turun sekalian adjust ngambil kaki
-        # Leg 1
-        kit1.servo[6].angle = 0 - data[5]
-        kit1.servo[7].angle = data[11+9] + data[4]
-
-        # Leg 3
-        kit1.servo[0].angle = 0  - data[8]
-        kit1.servo[1].angle = data[13+9] + data[7]
-
-        # Leg 5
-        kit2.servo[12].angle = 90
-        kit2.servo[11].angle = 180 - data[9+9] - data[1+9]
-        wait(delay)
-
-        # femur tibia 1 3 5 balik ke posisi awal
-        kit1.servo[7].angle = data[11+9] #femur1
-        kit1.servo[6].angle = 180 - data[12+9] #tibia1
-
-        kit1.servo[1].angle = data[13+9] #femur3
-        kit1.servo[0].angle = 180 - data[14+9] #tibia3
-
-        kit2.servo[11].angle = 180 - data[9+9] #femur5
-        kit2.servo[12].angle = 0 #90 - data[14+9] - data[8] #tibia5
-
-        wait(0.02)
-
+        
+        
         kit1.servo[4].angle = max(0, min((data[9+9] + 30), 180)) #femur2
         kit1.servo[3].angle = max(0, min((180 - data[10+9] + 30), 180)) #tibia2
         kit2.servo[14].angle = max(0, min((180 - data[13+9] - 30), 180)) #femur4
@@ -715,6 +681,44 @@ def jalan_kanan_miring(): #PR perlu buat versi strafe kanan
 
         kit2.servo[8].angle = 180 - data[11+9] #femur6
         kit2.servo[9].angle = data[12+9] #tibia6
+
+        wait(0.02)
+        
+        #femur angkat
+        # Leg 1
+        kit1.servo[7].angle = max(0, min((data[11+9] + 30), 180)) #femur1
+        kit1.servo[6].angle = max(0, min((180 - data[12+9] + 30), 180)) #tibia1
+        kit1.servo[1].angle = max(0, min((data[13+9] + 30), 180)) #femur3
+        kit1.servo[0].angle = max(0, min((180 - data[14+9] + 30), 180)) #tibia3
+        kit2.servo[11].angle = max(0, min((180 - data[9+9] - 30), 180)) #femur5
+#        kit2.servo[12].angle = max(0, min((data[10+9] - 30), 180)) #tibia5
+        wait(delay)
+
+        #femur 1 3 5 turun dan tibia turun sekalian adjust ngambil kaki
+        # Leg 1
+        kit1.servo[6].angle = 0 - data[5]
+        kit1.servo[7].angle = data[11+9] + data[4]
+
+        # Leg 3
+        kit1.servo[0].angle = 0  - data[8]
+        kit1.servo[1].angle = data[13+9] + data[7]
+
+        # Leg 5
+        kit2.servo[12].angle = 90
+        kit2.servo[11].angle = 180 - data[9+9] - data[1+9]
+        wait(delay)
+
+        # femur tibia 1 3 5 balik ke posisi awal
+        kit1.servo[7].angle = data[11+9] #femur1
+        kit1.servo[6].angle = 180 - data[12+9] #tibia1
+
+        kit1.servo[1].angle = data[13+9] #femur3
+        kit1.servo[0].angle = 180 - data[14+9] #tibia3
+
+        kit2.servo[11].angle = 180 - data[9+9] #femur5
+        kit2.servo[12].angle = 0 #90 - data[14+9] - data[8] #tibia5
+
+        
         time.sleep(0.25)
         print(f"stopped strafe kanan")
         break
