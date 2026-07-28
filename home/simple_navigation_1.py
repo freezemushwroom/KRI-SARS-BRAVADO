@@ -305,7 +305,8 @@ class NavigationController(Node):
                 #if self.current_state == 1.0 and (self.deviation_back_dist <= 0.0 or self.deviation_back_dist >= 1.3):
                 #    step = "forward_tetrapod"  
                 if self.current_state == 2.0 and self.deviation_pitch > 1.0:
-                    step = "forward_tetrapod"
+                    #step = "forward_tetrapod" # buka ini kalau sudah ada pergerakan tetrapod
+                    step = "forward"
                 elif self.current_state == 2.0 and self.deviation_pitch < 1.0:
                     step = "forward"
 
@@ -551,7 +552,7 @@ class NavigationController(Node):
             #self.pub.publish(self.msg)
             #self.get_logger().info("FORWARD")
             self.publish_movement(self.msg.data, "FORWARD")
-            time.sleep(2.0)
+            time.sleep(0.1) # kalau sudah pakai /movement_state ini hilang aja
 
         #self.stop()
 
