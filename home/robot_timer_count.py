@@ -39,7 +39,7 @@ class ElapsedTimer(Node):
         self.timer_started = False
 
         self.run_start_time = None
-        self.run_count = 0
+        self.run_count = 8 # kita atur 8 karena sudah 8 kali setelah 30 juli
 
         self.state_times = {}
 
