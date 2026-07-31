@@ -308,13 +308,13 @@ class NavigationController(Node):
                     self.publish_correction("Leaning Right(q3) ", self.deviation_yaw)
                     self.get_logger().info("Leaning Right(q3)")
                 
-                elif self.deviation_right_dist < 8 and self.deviation_right_dist > 1:
+                elif self.deviation_right_dist < 7 and self.deviation_right_dist > 1:
                     self.rightdist_dev_value = self.deviation_right_dist
                     self.correcting_state_strafe = True
                     self.publish_correction("Close to right wall ", self.deviation_right_dist)
                     self.get_logger().info("Close to right wall")
                 
-                elif self.deviation_left_dist < 8 and self.deviation_left_dist > 1:
+                elif self.deviation_left_dist < 7 and self.deviation_left_dist > 1:
                     self.leftdist_dev_value = self.deviation_left_dist
                     self.correcting_state_strafe = True
                     self.publish_correction("Close to left wall ", self.deviation_left_dist)
