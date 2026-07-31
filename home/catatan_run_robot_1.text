@@ -100,4 +100,128 @@ ython3 robot_timer_count.py
 [INFO] [1785306715.182964066] [elapsed_timer]: Saved to /home/satepasar/state_times_rl.csv
 [INFO] [1785306715.185635202] [elapsed_timer]: Waiting for next run.
 
+python3 robot_timer_count.py 
+[INFO] [1785485389.430594777] [elapsed_timer]: Elapsed Timer Ready
+[INFO] [1785485408.870286391] [elapsed_timer]: Run 9 Started
+[INFO] [1785485625.620025892] [elapsed_timer]: A : 216.750 sec
+[INFO] [1785485751.471520329] [elapsed_timer]: B_beta : 125.850 sec
+[INFO] [1785485761.170777813] [elapsed_timer]: B : 9.700 sec
+[INFO] [1785485782.472017050] [elapsed_timer]: B_next : 21.300 sec
+[INFO] [1785485917.171023466] [elapsed_timer]: C : 134.700 sec
+[INFO] [1785485926.022792388] [elapsed_timer]: D : 8.850 sec
+[INFO] [1785486012.771271335] [elapsed_timer]: D_next : 86.750 sec
+[INFO] [1785486012.774427994] [elapsed_timer]: Run 9 Finished
+[INFO] [1785486012.776768249] [elapsed_timer]: Total Time : 603.904 sec
+[INFO] [1785486012.779579722] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785486012.781911403] [elapsed_timer]: Waiting for next run...
+[INFO] [1785486155.210026496] [elapsed_timer]: Run 10 Started
+[INFO] [1785486465.861802404] [elapsed_timer]: A : 310.651 sec
+[INFO] [1785486496.612524539] [elapsed_timer]: B_beta : 30.752 sec
+[INFO] [1785486596.164393289] [elapsed_timer]: B : 99.550 sec
+[INFO] [1785486597.411050200] [elapsed_timer]: B_next : 1.247 sec
+[INFO] [1785486652.010833767] [elapsed_timer]: C : 54.600 sec
+[INFO] [1785486661.461891582] [elapsed_timer]: D : 9.450 sec
+[INFO] [1785486759.611125507] [elapsed_timer]: D_next : 98.150 sec
+[INFO] [1785486759.615182972] [elapsed_timer]: Run 10 Finished
+[INFO] [1785486759.617795327] [elapsed_timer]: Total Time : 604.403 sec
+[INFO] [1785486759.622312217] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785486759.625328754] [elapsed_timer]: Waiting for next run...
+[INFO] [1785486827.544486333] [elapsed_timer]: Run 11 Started
+[INFO] [1785486973.392238817] [elapsed_timer]: A : 145.850 sec
+[INFO] [1785487010.241446656] [elapsed_timer]: B_beta : 36.850 sec
+[INFO] [1785487018.442678176] [elapsed_timer]: B : 8.202 sec
+[INFO] [1785487059.994075046] [elapsed_timer]: B_next : 41.548 sec
+[INFO] [1785487122.642508221] [elapsed_timer]: C : 62.650 sec
+[INFO] [1785487132.392986625] [elapsed_timer]: D : 9.750 sec
+[INFO] [1785487177.192582289] [elapsed_timer]: D_next : 44.800 sec
+[INFO] [1785487177.197750575] [elapsed_timer]: Run 11 Finished
+[INFO] [1785487177.200433629] [elapsed_timer]: Total Time : 349.654 sec
+[INFO] [1785487177.204601375] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785487177.206932536] [elapsed_timer]: Waiting for next run...
+[INFO] [1785487212.205929020] [elapsed_timer]: Run 12 Started
+[INFO] [1785487371.383966343] [elapsed_timer]: A : 159.177 sec
+[INFO] [1785487424.882395488] [elapsed_timer]: B_beta : 53.499 sec
+[INFO] [1785487432.933403624] [elapsed_timer]: B : 8.051 sec
+[INFO] [1785487455.382801403] [elapsed_timer]: B_next : 22.450 sec
+[INFO] [1785487492.583716040] [elapsed_timer]: C : 37.200 sec
+[INFO] [1785487503.683255481] [elapsed_timer]: D : 11.100 sec
+[INFO] [1785487541.184506098] [elapsed_timer]: D_next : 37.501 sec
+[INFO] [1785487541.187950821] [elapsed_timer]: Run 12 Finished
+[INFO] [1785487541.190208979] [elapsed_timer]: Total Time : 328.981 sec
+[INFO] [1785487541.193397799] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785487541.196463854] [elapsed_timer]: Waiting for next run...
+[INFO] [1785487580.823047405] [elapsed_timer]: Run 13 Started
+[INFO] [1785487743.923906745] [elapsed_timer]: A : 163.100 sec
+[INFO] [1785487803.975710372] [elapsed_timer]: B_beta : 60.051 sec
+[INFO] [1785487814.526247798] [elapsed_timer]: B : 10.551 sec
+[INFO] [1785487855.776369683] [elapsed_timer]: B_next : 41.250 sec
+[INFO] [1785487874.878359462] [elapsed_timer]: C : 19.099 sec
+[INFO] [1785487882.475365307] [elapsed_timer]: D : 7.599 sec
+[INFO] [1785487909.176160833] [elapsed_timer]: D_next : 26.701 sec
+[INFO] [1785487909.179506104] [elapsed_timer]: Run 13 Finished
+[INFO] [1785487909.182929512] [elapsed_timer]: Total Time : 328.355 sec
+[INFO] [1785487909.186299809] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785487909.188895448] [elapsed_timer]: Waiting for next run...
+[INFO] [1785487966.196342536] [elapsed_timer]: Run 14 Started
+[INFO] [1785488104.399982966] [elapsed_timer]: A : 138.202 sec
+[INFO] [1785488141.846170820] [elapsed_timer]: B_beta : 37.448 sec
+[INFO] [1785488151.698389998] [elapsed_timer]: B : 9.850 sec
+[INFO] [1785488163.996972252] [elapsed_timer]: B_next : 12.300 sec
+[INFO] [1785488188.597817141] [elapsed_timer]: C : 24.600 sec
+[INFO] [1785488198.447040966] [elapsed_timer]: D : 9.850 sec
+[INFO] [1785488219.797535082] [elapsed_timer]: D_next : 21.350 sec
+[INFO] [1785488219.801296618] [elapsed_timer]: Run 14 Finished
+[INFO] [1785488219.804842451] [elapsed_timer]: Total Time : 253.605 sec
+[INFO] [1785488219.808255997] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785488219.810908372] [elapsed_timer]: Waiting for next run...
+[INFO] [1785488258.339074801] [elapsed_timer]: Run 15 Started
+[INFO] [1785488399.092281259] [elapsed_timer]: A : 140.752 sec
+[INFO] [1785488446.040729559] [elapsed_timer]: B_beta : 46.949 sec
+[INFO] [1785488455.493847185] [elapsed_timer]: B : 9.452 sec
+[INFO] [1785488526.292136867] [elapsed_timer]: B_next : 70.798 sec
+[INFO] [1785488562.090829319] [elapsed_timer]: C : 35.800 sec
+[INFO] [1785488571.542251304] [elapsed_timer]: D : 9.450 sec
+[INFO] [1785488685.640194419] [elapsed_timer]: D_next : 114.099 sec
+[INFO] [1785488685.643488659] [elapsed_timer]: Run 15 Finished
+[INFO] [1785488685.646382240] [elapsed_timer]: Total Time : 427.304 sec
+[INFO] [1785488685.650875141] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785488685.653640282] [elapsed_timer]: Waiting for next run...
+[INFO] [1785488732.890558238] [elapsed_timer]: Run 16 Started
+[INFO] [1785488885.065590636] [elapsed_timer]: A : 152.173 sec
+[INFO] [1785488923.063791543] [elapsed_timer]: B_beta : 37.999 sec
+[INFO] [1785488932.662836230] [elapsed_timer]: B : 9.600 sec
+[INFO] [1785488941.412999872] [elapsed_timer]: B_next : 8.750 sec
+[INFO] [1785488976.012884078] [elapsed_timer]: C : 34.600 sec
+[INFO] [1785488985.364757700] [elapsed_timer]: D : 9.351 sec
+[INFO] [1785489012.613673839] [elapsed_timer]: D_next : 27.250 sec
+[INFO] [1785489012.619946396] [elapsed_timer]: Run 16 Finished
+[INFO] [1785489012.623467530] [elapsed_timer]: Total Time : 279.725 sec
+[INFO] [1785489012.626044376] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785489012.628505121] [elapsed_timer]: Waiting for next run...
+[INFO] [1785489063.403163560] [elapsed_timer]: Run 17 Started
+[INFO] [1785489208.611820090] [elapsed_timer]: A : 145.209 sec
+[INFO] [1785489334.062305558] [elapsed_timer]: B_beta : 125.450 sec
+[INFO] [1785489343.212939369] [elapsed_timer]: B : 9.150 sec
+[INFO] [1785489378.166363002] [elapsed_timer]: B_next : 34.952 sec
+[INFO] [1785489407.011788403] [elapsed_timer]: C : 28.847 sec
+[INFO] [1785489416.815368276] [elapsed_timer]: D : 9.803 sec
+[INFO] [1785489450.964028933] [elapsed_timer]: D_next : 34.149 sec
+[INFO] [1785489450.967535150] [elapsed_timer]: Run 17 Finished
+[INFO] [1785489450.970671321] [elapsed_timer]: Total Time : 387.564 sec
+[INFO] [1785489450.973607920] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785489450.975949862] [elapsed_timer]: Waiting for next run...
+[INFO] [1785489494.800946223] [elapsed_timer]: Run 18 Started
+[INFO] [1785489609.552729989] [elapsed_timer]: A : 114.751 sec
+[INFO] [1785489659.001793271] [elapsed_timer]: B_beta : 49.450 sec
+[INFO] [1785489668.753396565] [elapsed_timer]: B : 9.750 sec
+[INFO] [1785489682.804823476] [elapsed_timer]: B_next : 14.052 sec
+[INFO] [1785489736.202385936] [elapsed_timer]: C : 53.397 sec
+[INFO] [1785489745.402231047] [elapsed_timer]: D : 9.200 sec
+[INFO] [1785489775.603946090] [elapsed_timer]: D_next : 30.200 sec
+[INFO] [1785489775.607489871] [elapsed_timer]: Run 18 Finished
+[INFO] [1785489775.610031201] [elapsed_timer]: Total Time : 280.806 sec
+[INFO] [1785489775.612916391] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+
+
+
 //batas
