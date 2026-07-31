@@ -43,7 +43,7 @@ class ElapsedTimer(Node):
 
         self.state_times = {}
 
-        self.csv_file = os.path.expanduser("~/state_times_rl.csv")
+        self.csv_file = os.path.expanduser("~/state_times_rl_2.csv")
 
         # Create CSV header once
         if not os.path.exists(self.csv_file):
