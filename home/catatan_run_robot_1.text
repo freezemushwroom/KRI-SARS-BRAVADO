@@ -271,6 +271,93 @@ python3 robot_timer_count.py
 [INFO] [1785736907.114630011] [elapsed_timer]: Total Time : 358.807 sec
 [INFO] [1785736907.121062030] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
 [INFO] [1785736907.123488067] [elapsed_timer]: Waiting for next run...
+python3 robot_timer_count.py 
+[INFO] [1785737155.381211744] [elapsed_timer]: Elapsed Timer Ready
+[INFO] [1785737185.789759684] [elapsed_timer]: Run 23 Started
+[INFO] [1785737262.740909069] [elapsed_timer]: A : 76.951 sec
+[INFO] [1785737298.288820606] [elapsed_timer]: B_beta : 35.549 sec
+[INFO] [1785737321.488526095] [elapsed_timer]: B : 23.200 sec
+[INFO] [1785737335.087929616] [elapsed_timer]: B_next : 13.600 sec
+[INFO] [1785737387.688973015] [elapsed_timer]: C : 52.600 sec
+[INFO] [1785737406.889190016] [elapsed_timer]: D : 19.200 sec
+[INFO] [1785737429.888869436] [elapsed_timer]: D_next : 23.000 sec
+[INFO] [1785737429.891699098] [elapsed_timer]: Run 23 Finished
+[INFO] [1785737429.894785602] [elapsed_timer]: Total Time : 244.102 sec
+[INFO] [1785737429.899973439] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785737429.902994029] [elapsed_timer]: Waiting for next run...
+[INFO] [1785737460.882044046] [elapsed_timer]: Run 24 Started
+[INFO] [1785737541.331440291] [elapsed_timer]: A : 80.449 sec
+[INFO] [1785737582.880925759] [elapsed_timer]: B_beta : 41.550 sec
+[INFO] [1785737597.530520505] [elapsed_timer]: B : 14.650 sec
+[INFO] [1785737604.284973794] [elapsed_timer]: B_next : 6.753 sec
+[INFO] [1785737672.881083330] [elapsed_timer]: C : 68.597 sec
+[INFO] [1785737692.785170998] [elapsed_timer]: D : 19.903 sec
+[INFO] [1785737718.930519082] [elapsed_timer]: D_next : 26.147 sec
+[INFO] [1785737718.934355678] [elapsed_timer]: Run 24 Finished
+[INFO] [1785737718.937696686] [elapsed_timer]: Total Time : 258.051 sec
+[INFO] [1785737718.942149189] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785737718.944551605] [elapsed_timer]: Waiting for next run...
+[INFO] [1785737759.409400407] [elapsed_timer]: Run 25 Started
+[INFO] [1785737858.082544473] [elapsed_timer]: A : 98.672 sec
+[INFO] [1785737896.734297714] [elapsed_timer]: B_beta : 38.650 sec
+[INFO] [1785737924.081415074] [elapsed_timer]: B : 27.349 sec
+[INFO] [1785737955.682531015] [elapsed_timer]: B_next : 31.601 sec
+[INFO] [1785737982.382850645] [elapsed_timer]: C : 26.700 sec
+[INFO] [1785737996.935866930] [elapsed_timer]: D : 14.553 sec
+[INFO] [1785738026.686253592] [elapsed_timer]: D_next : 29.748 sec
+[INFO] [1785738026.689151263] [elapsed_timer]: Run 25 Finished
+[INFO] [1785738026.691635356] [elapsed_timer]: Total Time : 267.279 sec
+[INFO] [1785738026.696884152] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785738026.699536006] [elapsed_timer]: Waiting for next run...
+[INFO] [1785738059.171703367] [elapsed_timer]: Run 26 Started
+[INFO] [1785738139.220683836] [elapsed_timer]: A : 80.049 sec
+[INFO] [1785738171.868424611] [elapsed_timer]: B_beta : 32.650 sec
+[INFO] [1785738193.468314884] [elapsed_timer]: B : 21.600 sec
+[INFO] [1785738212.317040960] [elapsed_timer]: B_next : 18.850 sec
+[INFO] [1785738251.520413990] [elapsed_timer]: C : 39.203 sec
+[INFO] [1785738273.369837913] [elapsed_timer]: D : 21.848 sec
+[INFO] [1785738320.118467912] [elapsed_timer]: D_next : 46.750 sec
+[INFO] [1785738320.121519062] [elapsed_timer]: Run 26 Finished
+[INFO] [1785738320.124668914] [elapsed_timer]: Total Time : 260.952 sec
+[INFO] [1785738320.129167240] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785738320.131938632] [elapsed_timer]: Waiting for next run...
+[INFO] [1785738358.861768323] [elapsed_timer]: Run 27 Started
+[INFO] [1785738429.714802489] [elapsed_timer]: A : 70.850 sec
+[INFO] [1785738462.462277985] [elapsed_timer]: B_beta : 32.750 sec
+[INFO] [1785738484.962457231] [elapsed_timer]: B : 22.501 sec
+[INFO] [1785738510.513410443] [elapsed_timer]: B_next : 25.549 sec
+[INFO] [1785738562.712811447] [elapsed_timer]: C : 52.200 sec
+[INFO] [1785738582.163667559] [elapsed_timer]: D : 19.450 sec
+[INFO] [1785738610.161801810] [elapsed_timer]: D_next : 27.999 sec
+[INFO] [1785738610.167240915] [elapsed_timer]: Run 27 Finished
+[INFO] [1785738610.169954382] [elapsed_timer]: Total Time : 251.303 sec
+[INFO] [1785738610.174279798] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785738610.177097581] [elapsed_timer]: Waiting for next run...
+[INFO] [1785738701.189015839] [elapsed_timer]: Run 28 Started
+[INFO] [1785738838.494490532] [elapsed_timer]: A : 137.310 sec
+[INFO] [1785738889.295595252] [elapsed_timer]: B_beta : 50.800 sec
+[INFO] [1785738912.348337779] [elapsed_timer]: B : 23.052 sec
+[INFO] [1785738957.594599332] [elapsed_timer]: B_next : 45.248 sec
+[INFO] [1785738985.093968555] [elapsed_timer]: C : 27.500 sec
+[INFO] [1785739002.993570998] [elapsed_timer]: D : 17.899 sec
+[INFO] [1785739031.094596662] [elapsed_timer]: D_next : 28.100 sec
+[INFO] [1785739031.097420092] [elapsed_timer]: Run 28 Finished
+[INFO] [1785739031.101170232] [elapsed_timer]: Total Time : 329.913 sec
+[INFO] [1785739031.105031061] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785739031.107582927] [elapsed_timer]: Waiting for next run...
+[INFO] [1785739087.478369373] [elapsed_timer]: Run 29 Started
+[INFO] [1785739163.883343679] [elapsed_timer]: A : 76.405 sec
+[INFO] [1785739212.285897707] [elapsed_timer]: B_beta : 48.401 sec
+[INFO] [1785739227.436171902] [elapsed_timer]: B : 15.150 sec
+[INFO] [1785739235.982631730] [elapsed_timer]: B_next : 8.549 sec
+[INFO] [1785739251.883235967] [elapsed_timer]: C : 15.900 sec
+[INFO] [1785739269.584012673] [elapsed_timer]: D : 17.701 sec
+[INFO] [1785739271.283996407] [elapsed_timer]: D_next : 1.700 sec
+[INFO] [1785739271.286499846] [elapsed_timer]: Run 29 Finished
+[INFO] [1785739271.289339609] [elapsed_timer]: Total Time : 183.809 sec
+[INFO] [1785739271.292859722] [elapsed_timer]: Saved to /home/satepasar/state_times_rl_2.csv
+[INFO] [1785739271.295628405] [elapsed_timer]: Waiting for next run...
+[INFO] [1785739319.150878769] [elapsed_timer]: Run 30 Started
 
 
 

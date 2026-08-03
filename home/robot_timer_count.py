@@ -39,9 +39,9 @@ class ElapsedTimer(Node):
         self.timer_started = False
 
         self.run_start_time = None
-        self.run_count = 22 
+        self.run_count = 29 
         # kita atur 8 karena sudah 8 kali setelah 30 juli
-        # sekarang kita atur 22 karena sudah 22 kali
+        # sekarang kita atur 29 karena sudah 29 kali
 
         self.state_times = {}
 
