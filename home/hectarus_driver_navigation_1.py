@@ -171,9 +171,9 @@ def putar_kiri():
         sleep(waktu_sleep)
 
         #coxa 1 3 mundur 5 maju
-        kit1.servo[8].angle = 60 #coxa1
-        kit1.servo[2].angle = 60 #coxa3
-        kit2.servo[10].angle = 60 #coxa5
+        kit1.servo[8].angle = 60 + 15 #coxa1
+        kit1.servo[2].angle = 60 + 15#coxa3
+        kit2.servo[10].angle = 60 + 15#coxa5
         print("Coxa 1 3 Mundur 5 Maju PKR")
         sleep(waktu_sleep)
         
@@ -210,9 +210,9 @@ def putar_kiri():
         sleep(waktu_sleep)
 
         #coxa 2 mundur 4 6 maju
-        kit1.servo[5].angle = 60 #coxa2
-        kit2.servo[13].angle = 60 #coxa4
-        kit2.servo[7].angle = 60 #coxa6
+        kit1.servo[5].angle = 60 + 15#coxa2
+        kit2.servo[13].angle = 60 + 15 #coxa4
+        kit2.servo[7].angle = 60 + 15 #coxa6
         print("Coxa 2 Mundur Coxa 4 6 Maju PKR")
         sleep(waktu_sleep)
 
@@ -259,9 +259,9 @@ def putar_kanan():
         sleep(waktu_sleep)
 
         #coxa 1 3 5 maju
-        kit1.servo[8].angle = 120 #coxa1
-        kit1.servo[2].angle = 120 #coxa3
-        kit2.servo[10].angle = 120 #coxa5
+        kit1.servo[8].angle = 120 - 15 #coxa1
+        kit1.servo[2].angle = 120 - 15 #coxa3
+        kit2.servo[10].angle = 120 - 15 #coxa5
         print("Coxa 1 3 Maju 5 Mundur")
         sleep(waktu_sleep)
         
@@ -298,9 +298,9 @@ def putar_kanan():
         sleep(waktu_sleep)
 
         #coxa 2 4 6 maju
-        kit1.servo[5].angle = 120 #coxa2
-        kit2.servo[13].angle = 120 #coxa4
-        kit2.servo[7].angle = 120 #coxa6
+        kit1.servo[5].angle = 120 - 15 #coxa2
+        kit2.servo[13].angle = 120 - 15 #coxa4
+        kit2.servo[7].angle = 120 - 15 #coxa6
         print("Coxa 2 Maju Coxa 4 6 Mundur")
         sleep(waktu_sleep)
 
